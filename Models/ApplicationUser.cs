@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace EDUZilla.Data.Entities
+namespace EDUZilla.Models
 {
     public class ApplicationUser : IdentityUser
     {
