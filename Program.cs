@@ -1,5 +1,5 @@
 using EDUZilla.Data;
-using EDUZilla.Data.Entities;
+using EDUZilla.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

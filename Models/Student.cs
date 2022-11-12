@@ -1,4 +1,4 @@
-﻿namespace EDUZilla.Data.Entities
+﻿namespace EDUZilla.Models
 {
     public class Student : ApplicationUser
     {

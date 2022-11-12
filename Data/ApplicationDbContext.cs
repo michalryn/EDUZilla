@@ -1,4 +1,4 @@
-﻿using EDUZilla.Data.Entities;
+﻿using EDUZilla.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,5 +14,6 @@ namespace EDUZilla.Data
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Parent> Parents { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
     }
 }
