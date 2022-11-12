@@ -14,5 +14,50 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin: 0;  
+    margin-bottom: 60px;
+    height: 100%;
+    width: auto;
+}
+
+.logo {
+    height: 40px !important;
+    width: auto;
+}
+
+.wrapper {
+    display: flex;
+}
+
+.navbar{
+    height: 60px;
+}
+
+.styleCard {
+    height: 35rem;
+    width: 30rem;
+}
+
+.toBottom {
+    position: absolute;
+    bottom: 15px;
+    left: 40%;
+}
+
+.styleWidth {
+    position: absolute;
+    width: 480px !important;
+    height: auto;
+    margin-left: auto;
+    margin-right: 0;
+    left: 65%;
+    top: 15%;
+}
+.item-image {
+    position: absolute;
+    max-height: 560px !important;
+    width: 900px;
+    left: 7%;
+    top: 15%;
+    overflow: hidden;
 }
