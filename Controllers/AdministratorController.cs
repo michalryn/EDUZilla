@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace EDUZilla.Controllers
 {
-    [Authorize(Roles = "Student")]
+    [Authorize(Roles = "Admin")]
     public class AdministratorController : Controller
     {
         #region Properties
@@ -36,9 +36,9 @@ namespace EDUZilla.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateUser()
+        public async Task<IActionResult> CreateUser()
         {
-            IList<IdentityRole> roleList = _roleManager.Roles.ToList();
+            IList<IdentityRole> roleList = await Task.Run(() => _roleManager.Roles.ToList());
 
             string[] roleNames = new string[roleList.Count()];
             for(int i = 0; i < roleList.Count(); i++)
@@ -100,8 +100,15 @@ namespace EDUZilla.Controllers
                 }
             }
 
-            return CreateUser();
+            return await CreateUser();
         }
+
+
+        /*[HttpGet]
+        public async Task<IActionResult> AddToRole()
+        {
+
+        }*/
 
         [HttpGet]
         public IActionResult CreateRole()
