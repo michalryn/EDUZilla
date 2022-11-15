@@ -21,5 +21,9 @@ namespace EDUZilla.ViewModels.User
         [DataType(DataType.Password)]
         [Display(Name = "Hasło")]
         public string Password { get; set; }
+
+        [Required(ErrorMessage = "Wybierz typ użytkownika")]
+        public string Role { get; set; }
+        public string[]? Roles { get; set; }
     }
 }

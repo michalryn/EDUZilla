@@ -113,7 +113,7 @@ namespace EDUZilla.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = CreateUser();
+                ApplicationUser user = CreateUser();
                 user.FirstName = "Michał";
                 user.LastName = "Ryniewicz";
                 
