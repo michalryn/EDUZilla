@@ -15,13 +15,20 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false).AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
-/*builder.Services.AddControllersWithViews(options =>
+builder.Services.AddControllersWithViews(options =>
 {
     var policy = new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser()
                     .Build();
     options.Filters.Add(new AuthorizeFilter(policy));
-});*/
+});
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.SlidingExpiration = true;
+    options.LoginPath = "/Home/Index";
+});
 
 var app = builder.Build();
 

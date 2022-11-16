@@ -11,29 +11,31 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-1">
             <div class="container-fluid">
-                 <a class="navbar-brand" href="#"><img class="logo" src="~/Images/GodzillaPlaceHolderLogo.JPG" alt="logo"> </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">     
-                    <span class="navbar-toggler-icon"></span>   
-                </button>   
-                <div class="collapse navbar-collapse" id="navbarColor01">     
-                    <ul class="navbar-nav me-auto">       
-                        <li class="nav-item">        
-                            <a class="nav-link active" href="#">EDUZilla         
-                                <span class="visually-hidden">(current)</span>         
-                            </a>      
+                <a class="navbar-brand" asp-contoller="Home" asp-action="Index"><img class="logo" src="~/Images/GodzillaPlaceHolderLogo.JPG" alt="logo"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                EDUZilla
+                                <span class="visually-hidden">(current)</span>
+                            </a>
                         </li>
-                        <li class="nav-item">        
-                            <a class="nav-link" href="#">About</a>       
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
                         </li>
                     </ul>
-                    <form class="d-flex">                        
-                        <button class="btn btn-primary">  
+                    <partial name="_LoginPartial" />
+                    <form class="d-flex">
+                        <button class="btn btn-primary">
                             <i class="fa-solid fa-globe"></i>
-                        </button> 
+                        </button>
                     </form>
-                </div>  
+                </div>
             </div>
         </nav>
     </header>
