@@ -25,20 +25,20 @@ body {
     width: auto;
 }
 
-.wrapper {
+/*.wrapper {
     display: flex;
 }
 
 .navbar{
     height: 60px;
-}
+}*/
 
-.styleCard {
+/*.styleCard {
     height: 35rem;
-    width: 30rem;
+    width: auto;
 }
-
-.toBottom {
+    */
+/*.toBottom {
     position: absolute;
     bottom: 15px;
     left: 40%;
@@ -60,4 +60,4 @@ body {
     left: 7%;
     top: 15%;
     overflow: hidden;
-}
+}*/
