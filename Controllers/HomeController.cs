@@ -53,6 +53,22 @@ namespace EDUZilla.Controllers
         {
             return View();
         }
+        public IActionResult Marks()
+        {
+            return View();
+        }
+        public IActionResult Notice()
+        {
+            return View();
+        }
+        public IActionResult Schedule()
+        {
+            return View();
+        }
+        public IActionResult Tests()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
