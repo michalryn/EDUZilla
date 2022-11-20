@@ -2,6 +2,7 @@
 {
     public class Teacher : ApplicationUser
     {
-        public string? Class { get; set; }
+        public int? TutorClassId { get; set; }
+        public virtual Class? TutorClass { get; set; }
     }
 }

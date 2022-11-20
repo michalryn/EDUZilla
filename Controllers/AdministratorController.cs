@@ -1,5 +1,8 @@
 ﻿using EDUZilla.Models;
+using EDUZilla.Services;
+using EDUZilla.ViewModels.Class;
 using EDUZilla.ViewModels.Role;
+using EDUZilla.ViewModels.Student;
 using EDUZilla.ViewModels.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -15,15 +18,19 @@ namespace EDUZilla.Controllers
 
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly StudentService _studentService;
+        private readonly ClassService _classService;
 
         #endregion
 
         #region Constructors
 
-        public AdministratorController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
+        public AdministratorController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, StudentService studentService, ClassService classService)
         {
             _roleManager = roleManager;
             _userManager = userManager;
+            _studentService = studentService;
+            _classService = classService;
         }
 
         #endregion
@@ -103,13 +110,6 @@ namespace EDUZilla.Controllers
             return await CreateUser();
         }
 
-
-        /*[HttpGet]
-        public async Task<IActionResult> AddToRole()
-        {
-
-        }*/
-
         [HttpGet]
         public IActionResult CreateRole()
         {
@@ -139,6 +139,29 @@ namespace EDUZilla.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AssignStudentToClass()
+        {
+            IList<StudentListViewModel> studentsList = await _studentService.GetStudentsListAsync();
+
+            return View(studentsList);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ViewClasses()
+        {
+            List<ClassListViewModel> list = await _classService.GetClassesListAsync();
+            return View(list);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ViewStudents()
+        {
+            IList<StudentListViewModel> studentsList = await _studentService.GetStudentsListAsync();
+
+            return View(studentsList);
         }
 
         private static class UserStore<T>

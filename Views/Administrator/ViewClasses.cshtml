@@ -1,0 +1,26 @@
+﻿@using EDUZilla.ViewModels.Class;
+@{
+    ViewData["Title"] = "Klasy";
+}
+
+<h1>Klasy</h1>
+<ul class="list-group mb-3">
+    @if (Model != null)
+    {
+        @foreach (ClassListViewModel classModel in Model)
+        {
+            <li class="list-group-item">@classModel.Id @classModel.Name</li>
+        }
+    }
+    else
+    {
+        <li class="list-group-item">Brak klas w systemie</li>
+    }
+</ul>
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label"></label>
+        <input type="text" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Stwórz klasę</button>
+</form>

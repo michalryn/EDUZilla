@@ -1,5 +1,6 @@
 using EDUZilla.Data;
 using EDUZilla.Models;
+using EDUZilla.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -15,6 +16,9 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false).AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+//Dependency injection
+builder.Services.AddProjectService();
 
 builder.Services.AddControllersWithViews(options =>
 {

@@ -1,0 +1,30 @@
+﻿@using EDUZilla.ViewModels.Student;
+@using EDUZilla.ViewModels.Parent;
+@model StudentAddParentViewModel;
+
+@{
+    ViewData["Title"] = "Dodaj rodzica";
+}
+
+<h1>Dodaj rodzica</h1>
+<p>@Model.Id</p>
+<p>@Model.Email</p>
+<p>@Model.FirstName</p>
+<p>@Model.LastName</p>
+<p>Rodzic:</p>
+<p>@Model.ParentId</p>
+<p>@Model.ParentFirstName</p>
+<p>@Model.ParentLastName</p>
+
+<h3>Rodzice</h3>
+@foreach (ParentListViewModel parent in Model.Parents)
+{
+    <p>
+        @parent.Email @parent.FirstName @parent.LastName
+        <form asp-action="AddParent" method="post">
+            <input type="hidden" name="studentId" value="@Model.Id" />
+            <input type="hidden" name="parentId" value="@parent.Id" />
+            <button type="submit">Dodaj</button>
+        </form>
+    </p>
+}
