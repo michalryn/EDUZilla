@@ -27,7 +27,12 @@ namespace EDUZilla.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            return View();
+            if (_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Notice");
+            }
+            else return View();
+
         }
 
         [HttpPost]
@@ -40,7 +45,7 @@ namespace EDUZilla.Controllers
 
                 if(result.Succeeded)
                 {
-                    return RedirectToAction("");
+                    return RedirectToAction("Notice");
                 }
 
                 ModelState.AddModelError(string.Empty, "Nieudana próba logowania!");
