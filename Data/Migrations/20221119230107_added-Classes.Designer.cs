@@ -4,6 +4,7 @@ using EDUZilla.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EDUZilla.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221119230107_added-Classes")]
+    partial class addedClasses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,14 +115,12 @@ namespace EDUZilla.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TutorId")
+                    b.Property<string>("TeacherId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TutorId")
-                        .IsUnique()
-                        .HasFilter("[TutorId] IS NOT NULL");
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("Classes");
                 });
@@ -293,8 +293,8 @@ namespace EDUZilla.Data.Migrations
                 {
                     b.HasBaseType("EDUZilla.Models.ApplicationUser");
 
-                    b.Property<int?>("TutorClassId")
-                        .HasColumnType("int");
+                    b.Property<string>("Class")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("Teacher");
                 });
@@ -302,8 +302,8 @@ namespace EDUZilla.Data.Migrations
             modelBuilder.Entity("EDUZilla.Models.Class", b =>
                 {
                     b.HasOne("EDUZilla.Models.Teacher", "Tutor")
-                        .WithOne("TutorClass")
-                        .HasForeignKey("EDUZilla.Models.Class", "TutorId");
+                        .WithMany()
+                        .HasForeignKey("TeacherId");
 
                     b.Navigation("Tutor");
                 });
@@ -361,15 +361,13 @@ namespace EDUZilla.Data.Migrations
 
             modelBuilder.Entity("EDUZilla.Models.Student", b =>
                 {
-                    b.HasOne("EDUZilla.Models.Class", "Class")
+                    b.HasOne("EDUZilla.Models.Class", null)
                         .WithMany("Students")
                         .HasForeignKey("ClassId");
 
                     b.HasOne("EDUZilla.Models.Parent", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId");
-
-                    b.Navigation("Class");
 
                     b.Navigation("Parent");
                 });
@@ -382,11 +380,6 @@ namespace EDUZilla.Data.Migrations
             modelBuilder.Entity("EDUZilla.Models.Parent", b =>
                 {
                     b.Navigation("Children");
-                });
-
-            modelBuilder.Entity("EDUZilla.Models.Teacher", b =>
-                {
-                    b.Navigation("TutorClass");
                 });
 #pragma warning restore 612, 618
         }
