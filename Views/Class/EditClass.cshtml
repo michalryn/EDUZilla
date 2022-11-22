@@ -1,0 +1,63 @@
+﻿@using EDUZilla.ViewModels.Student;
+@{
+    ViewData["Title"] = "Edytuj klasę";
+}
+
+<h1>Edytuj klasę</h1>
+<form method="post">
+    <input type="hidden" name="ClassId" value="@Model.ClassId">
+    <h2>Uczniowie należący do klasy @Model.Name</h2>
+    <table class="table table-dark table-bordered table-responsive-sm">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Imię</th>
+                <th scope="col">Nazwisko</th>
+                <th scope="col">Email</th>
+                <th scope="col">Usuń</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (StudentListViewModel student in Model.AssignedStudents)
+            {
+                <tr>
+                    <td scope="row"></td>
+                    <td>@student.FirstName</td>
+                    <td>@student.LastName</td>
+                    <td>@student.Email</td>
+                    <td>
+                        <input type="checkbox" name="DeleteStudent" class="form-check-input" value="@student.StudentId">
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    <h2>Uczniowi nieprzypisani do żadnej klasy</h2>
+    <table class="table table-dark table-bordered table-responsive-sm">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Imię</th>
+                <th scope="col">Nazwisko</th>
+                <th scope="col">Email</th>
+                <th scope="col">Dodaj</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (StudentListViewModel student in Model.NotAssignedStudents)
+            {
+                <tr>
+                    <td scope="row"></td>
+                    <td>@student.FirstName</td>
+                    <td>@student.LastName</td>
+                    <td>@student.Email</td>
+                    <td>
+                        <input type="checkbox" name="AddStudent" class="form-check-input" value="@student.StudentId">
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+</form>

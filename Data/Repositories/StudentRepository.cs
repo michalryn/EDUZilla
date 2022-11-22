@@ -31,5 +31,12 @@ namespace EDUZilla.Data.Repositories
         {
             await UpdateAndSaveChangesAsync(student);
         }
+
+        public IQueryable<Student> GetStudentsWithoutClass()
+        {
+            var result = DataContext.Students.Where(s => s.ClassId == null);
+
+            return result;
+        }
     }
 }

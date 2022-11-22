@@ -149,12 +149,13 @@ namespace EDUZilla.Controllers
             return View(studentsList);
         }
 
-        [HttpGet]
+        /*[HttpGet]
         public async Task<IActionResult> ViewClasses()
         {
             List<ClassListViewModel> list = await _classService.GetClassesListAsync();
+
             return View(list);
-        }
+        }*/
 
         [HttpGet]
         public async Task<IActionResult> ViewStudents()

@@ -38,6 +38,7 @@ namespace EDUZilla.Services
                     studentsList.Add(new StudentListViewModel()
                     {
                         StudentId = student.Id,
+                        Email = student.Email,
                         FirstName = student.FirstName,
                         LastName = student.LastName,
                     });

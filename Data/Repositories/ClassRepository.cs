@@ -1,4 +1,5 @@
 ﻿using EDUZilla.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EDUZilla.Data.Repositories
 {
@@ -14,5 +15,18 @@ namespace EDUZilla.Data.Repositories
             return GetAll();
         }
 
+        public IQueryable<Class> GetClassById(int id)
+        {
+            var result = DataContext.Classes.Where(c => c.Id == id).Include("Students");
+
+            return result;
+        }
+
+        public async Task<bool> CheckIfClassExistsAsync(string name)
+        {
+            var result = await DataContext.Classes.AnyAsync(c => c.Name == name);
+
+            return result;
+        }
     }
 }
