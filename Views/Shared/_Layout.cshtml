@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -11,12 +14,8 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-1 mb-3">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-1 mb-0">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-contoller="Home" asp-action="Index"><img class="logo" src="~/Images/GodzillaPlaceHolderLogo.JPG" alt="logo"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
@@ -39,6 +38,51 @@
             </div>
         </nav>
     </header>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <header>   
+            <nav class="navbar navbar-expand-lg navbar-light bg-light py-2 mb-3">           
+                <div class="container-fluid"> 
+                    <div class="collapse navbar-collapse" id="navbarColor01">                        
+                        <ul class="navbar-nav me-auto">       
+                        <li class="nav-item">        
+                             <a class="navbar-brand" href="#"><img class="logo" src="~/Images/GodzillaPlaceHolderLogo.JPG" alt="logo"> </a>    
+                        </li>
+                    </ul>
+                    <form class="d-flex">  
+                        <li class="nav-item icons">        
+                            <a asp-controller="Home" asp-action="Notice" class="navbar-brand center">                            
+                                <i class="fa-solid fa-clipboard fa-2x"></i>                           
+                                <p>Ogłoszenia</p>                           
+                            </a>    
+                        </li>
+                        <li class="nav-item icons">        
+                             <a asp-controller="Home" asp-action="Tests" class="navbar-brand center">
+                                 <i class="fa-solid fa-table-list fa-2x"></i>
+                                <p>Testy</p>                           
+                            </a>  
+                        </li>
+                        <li class="nav-item icons">        
+                            <a asp-controller="Home" asp-action="Marks" class="navbar-brand center">                            
+                                <i class="fa-solid fa-book fa-2x"></i>                         
+                                <p>Oceny</p>                           
+                            </a>    
+                        </li>
+                        
+                        <li class="nav-item icons">        
+                             <a asp-controller="Home" asp-action="Schedule" class="navbar-brand center">                            
+                                <i class="fa-solid fa-calendar-days fa-2x"></i>                          
+                                <p>Terminarz</p>                           
+                            </a>    
+                        </li>
+                            
+                    </form>
+                </div>  
+            </div>
+        </nav>
+    </header>
+    }
+    
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
