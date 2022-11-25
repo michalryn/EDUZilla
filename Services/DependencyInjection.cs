@@ -1,4 +1,8 @@
 ﻿using EDUZilla.Data.Repositories;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Extensions.Localization;
+using System.Reflection;
 
 namespace EDUZilla.Services
 {
@@ -14,6 +18,21 @@ namespace EDUZilla.Services
 
             services.AddScoped<ClassRepository>();
             services.AddScoped<ClassService>();
+
+            services.AddControllersWithViews(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                                .RequireAuthenticatedUser()
+                                .Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+            }).AddViewLocalization().AddDataAnnotationsLocalization(options =>
+            {
+                var type = typeof(LanguageResource);
+                var assemblyName = new AssemblyName(type.GetTypeInfo().Assembly.FullName);
+                var factory = services.BuildServiceProvider().GetService<IStringLocalizerFactory>();
+                var localizer = factory.Create("LanguageResource", assemblyName.Name);
+                options.DataAnnotationLocalizerProvider = (t, f) => localizer;
+            });
 
             return services;
         }
