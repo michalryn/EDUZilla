@@ -14,13 +14,11 @@ namespace EDUZilla.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger, SignInManager<ApplicationUser> signInManager, ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> logger, SignInManager<ApplicationUser> signInManager)
         {
             _logger = logger;
             _signInManager = signInManager;
-            _context = context;
         }
 
         [HttpGet]
@@ -31,7 +29,8 @@ namespace EDUZilla.Controllers
             {
                 return RedirectToAction("Notice");
             }
-            else return View();
+            else
+                return View();
 
         }
 

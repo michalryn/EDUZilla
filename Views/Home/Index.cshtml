@@ -2,7 +2,7 @@
 @model LoginViewModel
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = @languageResource["HomePage"];
 }
 <div class="container-fluid pt-3 vh-100">
     <div class="row align-items-center" style="min-height: 75vh">
@@ -28,7 +28,7 @@
         </div>
         <div class="col col-sm-4">
             <div class="card text-white bg-primary mb-3 text-center">
-                <div class="card-header">LOGOWANIE</div>
+                <div class="card-header">@languageResource["LoginHeader"]</div>
                 <div class="card-body">
                     <form method="post">
                         <div class="mb-3">
@@ -46,7 +46,7 @@
                             <label asp-for="RememberMe" class="form-check-label"></label>
                         </div>
                         <div class="mb-3">
-                            <button type="submit" class="w-100 btn btn-lg btn-info">Zaloguj</button>
+                            <button type="submit" class="w-100 btn btn-lg btn-info">@languageResource["Login"]</button>
                         </div>
                         <div class="mb-3">
                             <a href="#" style="color:green"><b>Załóż konto</b></a>
