@@ -1,0 +1,40 @@
+﻿@using EDUZilla.ViewModels.Class
+
+
+
+@{
+    ViewData["Title"] = "Zmień wychowawce";
+}
+
+<h1>Wychowawca</h1>
+
+<p class="mb-3">
+    <b>Aktualny wychowawca klasy @Model.ClassName: </b>@if (Model.TutorId == null)
+    {
+        @languageResource["NoTutor"]
+        ;
+    }
+    else
+    {
+        @Model.TutorName
+        ;
+    }
+</p>
+
+@if (Model.TutorId != null)
+{
+    <form method="post" asp-action="DeleteTutor">
+        <button value="@Model.ClassId" name="id" type="submit" class="btn btn-danger mb-3">Usuń wychowawcę</button>
+    </form>
+}
+
+
+<form method="post" asp-action="EditTutor">
+    <input type="hidden" name="id" value="@Model.ClassId" />
+    <div class="mb-3">
+        <label class="form-label">Wybierz nauczyciela</label>
+        <select class="form-select" asp-items="Model.AvailableTeachers" name="teacher"></select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+</form>
