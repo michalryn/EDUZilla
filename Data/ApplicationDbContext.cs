@@ -17,6 +17,12 @@ namespace EDUZilla.Data
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Class> Classes { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+        }
+
         public void AttachEntity<TEntity>(TEntity entity) where TEntity : class, new()
         {
             Set<TEntity>().Attach(entity);

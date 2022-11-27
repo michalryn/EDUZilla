@@ -19,6 +19,8 @@ namespace EDUZilla.Services
             services.AddScoped<ClassRepository>();
             services.AddScoped<ClassService>();
 
+            services.AddScoped<TeacherRepository>();
+
             services.AddControllersWithViews(options =>
             {
                 var policy = new AuthorizationPolicyBuilder()

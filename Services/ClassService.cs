@@ -2,6 +2,8 @@
 using EDUZilla.Models;
 using EDUZilla.ViewModels.Class;
 using EDUZilla.ViewModels.Student;
+using EDUZilla.ViewModels.Teacher;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace EDUZilla.Services
@@ -12,15 +14,19 @@ namespace EDUZilla.Services
 
         private readonly ClassRepository _classRepository;
         private readonly StudentRepository _studentRepository;
+        private readonly TeacherRepository _teacherRepository;
+
+        public int TeacherListVieModel { get; private set; }
 
         #endregion
 
         #region Constructors
 
-        public ClassService(ClassRepository classRepository, StudentRepository studentRepository)
+        public ClassService(ClassRepository classRepository, StudentRepository studentRepository, TeacherRepository teacherRepository)
         {
             _classRepository = classRepository;
             _studentRepository = studentRepository;
+            _teacherRepository = teacherRepository;
         }
 
         #endregion
@@ -36,10 +42,12 @@ namespace EDUZilla.Services
                 classList = new List<ClassListViewModel>();
                 foreach (var item in result)
                 {
+                    int studentsCount = item.Students?.Count ?? 0;
                     classList.Add(new ClassListViewModel
                     {
                         Id = item.Id,
                         Name = item.Name,
+                        Count = studentsCount
                     });
                 }
             }
@@ -75,7 +83,7 @@ namespace EDUZilla.Services
 
         public async Task<EditClassViewModel> GetEditClassViewModelAsync(int id)
         {
-            var result = await _classRepository.GetClassById(id).SingleAsync();
+            var result = await _classRepository.GetClassById(id).Include("Students").SingleAsync();
             var notAssigned = await _studentRepository.GetStudentsWithoutClass().ToListAsync();
 
             if (result == null)
@@ -126,8 +134,6 @@ namespace EDUZilla.Services
                 NotAssignedStudents = NotAssignedStudents
             };
 
-
-
             return viewModel;
         }
 
@@ -135,7 +141,7 @@ namespace EDUZilla.Services
         {
             try
             {
-                Class group = await _classRepository.GetClassById(form.ClassId).SingleAsync();
+                Class group = await _classRepository.GetClassById(form.ClassId).Include("Students").SingleAsync();
 
                 if(group == null)
                     return false;
@@ -165,6 +171,85 @@ namespace EDUZilla.Services
 
                 await _classRepository.UpdateAndSaveChangesAsync(group);
 
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<EditTutorViewModel?> GetEditTutorViewModelAsync(int id)
+        {
+            var classData = await _classRepository.GetClassById(id).Include("Tutor").SingleAsync();
+            var availableTeachers = await _teacherRepository.GetTeachers().Include("TutorClass").Where(t => t.TutorClass == null).ToListAsync();
+
+            if(classData == null)
+            {
+                return null;
+            }
+
+            if (!availableTeachers.Any())
+            {
+                availableTeachers = new List<Teacher>();
+            }
+
+            List<SelectListItem> teacherListViewModel = new List<SelectListItem>();
+
+            foreach (var teacher in availableTeachers)
+            {
+                teacherListViewModel.Add(new SelectListItem()
+                {
+                    Value = teacher.Id,
+                    Text = teacher.FirstName + " " + teacher.LastName,
+                });
+            }
+
+            EditTutorViewModel viewModel = new EditTutorViewModel()
+            {
+                ClassId = classData.Id,
+                ClassName = classData.Name,
+                TutorId = classData.Tutor?.Id,
+                TutorName = classData.Tutor?.FirstName + " " + classData.Tutor?.LastName,
+                AvailableTeachers = teacherListViewModel
+            };
+
+            return viewModel;
+        }
+
+        public async Task<bool> EditTutorAsync(int id, string teacherId)
+        {
+            try
+            {
+                Class group = await _classRepository.GetClassById(id).Include("Tutor").SingleAsync();
+                Teacher teacher = await _teacherRepository.GetTeacherById(teacherId).Include("TutorClass").SingleAsync();
+                if (group == null)
+                    return false;
+
+                group.Tutor = teacher;
+
+                await _classRepository.UpdateAndSaveChangesAsync(group);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<bool> DeleteTutorAsync(int id)
+        {
+            try
+            {
+                Class group = await _classRepository.GetClassById(id).Include("Tutor").SingleAsync();
+                if (group == null)
+                    return false;
+
+                group.Tutor = null;
+
+                await _classRepository.UpdateAndSaveChangesAsync(group);
             }
             catch (Exception ex)
             {

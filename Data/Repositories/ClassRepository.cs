@@ -12,12 +12,12 @@ namespace EDUZilla.Data.Repositories
 
         public IQueryable<Class> GetClasses()
         {
-            return GetAll();
+            return GetAll().Include("Students");
         }
 
         public IQueryable<Class> GetClassById(int id)
         {
-            var result = DataContext.Classes.Where(c => c.Id == id).Include("Students");
+            var result = DataContext.Classes.Where(c => c.Id == id);
 
             return result;
         }

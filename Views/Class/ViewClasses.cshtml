@@ -9,7 +9,17 @@
     {
         @foreach (ClassListViewModel classModel in Model)
         {
-            <li class="list-group-item d-flex justify-content-between">@classModel.Id @classModel.Name<a asp-action="EditClass" asp-route-id="@classModel.Id" class="btn btn-primary">Edytuj</a></li>
+            <li class="list-group-item d-flex justify-content-between align-items-baseline">
+                @classModel.Id @classModel.Name
+                <div class="d-flex align-items-baseline">
+                    <div class="badge bg-primary rounded-pill mx-1">
+                        @classModel.Count
+                        <i class="fa-solid fa-people-group"></i>
+                    </div>
+                    <a asp-action="EditTutor" asp-route-id="@classModel.Id" class="btn btn-primary rounded mx-1">Wychowawca</a>
+                    <a asp-action="EditClass" asp-route-id="@classModel.Id" class="btn btn-primary rounded ms-1">Uczniowie</a>
+                </div>
+            </li>
         }
     }
     else

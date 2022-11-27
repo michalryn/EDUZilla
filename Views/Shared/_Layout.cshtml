@@ -1,7 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -31,61 +28,17 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-controller="Language" asp-action="Change" asp-route-culture="pl-PL">polski</a>
+                            <a class="nav-link text-light" asp-controller="Language" asp-action="Change" asp-route-culture="pl-PL" asp-route-returnUrl="@Url.Action()">polski</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-controller="Language" asp-action="Change" asp-route-culture="en-Us">angielski</a>
+                            <a class="nav-link text-light" asp-controller="Language" asp-action="Change" asp-route-culture="en-Us" asp-route-returnUrl="@Url.Action()">angielski</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    @if (SignInManager.IsSignedIn(User))
-    {
-        <header>   
-            <nav class="navbar navbar-expand-lg navbar-light bg-light py-2 mb-3">           
-                <div class="container-fluid"> 
-                    <div class="collapse navbar-collapse" id="navbarColor01">                        
-                        <ul class="navbar-nav me-auto">       
-                        <li class="nav-item">        
-                             <a class="navbar-brand" href="#"><img class="logo" src="~/Images/GodzillaPlaceHolderLogo.JPG" alt="logo"> </a>    
-                        </li>
-                    </ul>
-                    <form class="d-flex">  
-                        <li class="nav-item icons">        
-                            <a asp-controller="Home" asp-action="Notice" class="navbar-brand center">                            
-                                <i class="fa-solid fa-clipboard fa-2x"></i>                           
-                                <p>Ogłoszenia</p>                           
-                            </a>    
-                        </li>
-                        <li class="nav-item icons">        
-                             <a asp-controller="Home" asp-action="Tests" class="navbar-brand center">
-                                 <i class="fa-solid fa-table-list fa-2x"></i>
-                                <p>Testy</p>                           
-                            </a>  
-                        </li>
-                        <li class="nav-item icons">        
-                            <a asp-controller="Home" asp-action="Marks" class="navbar-brand center">                            
-                                <i class="fa-solid fa-book fa-2x"></i>                         
-                                <p>Oceny</p>                           
-                            </a>    
-                        </li>
-                        
-                        <li class="nav-item icons">        
-                             <a asp-controller="Home" asp-action="Schedule" class="navbar-brand center">                            
-                                <i class="fa-solid fa-calendar-days fa-2x"></i>                          
-                                <p>Terminarz</p>                           
-                            </a>    
-                        </li>
-                            
-                    </form>
-                </div>  
-            </div>
-        </nav>
-    </header>
-    }
-    
+    <partial name="_UserBarPartial" />
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -98,7 +51,7 @@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

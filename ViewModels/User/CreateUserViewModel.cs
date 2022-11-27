@@ -4,26 +4,26 @@ namespace EDUZilla.ViewModels.User
 {
     public class CreateUserViewModel
     {
-        [Required(ErrorMessage = "Podaj imię użytkownika!")]
-        [Display(Name = "Imię")]
+        [Required(ErrorMessage = "FirstNameError")]
+        [Display(Name = "FirstName")]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Podaj nazwisko użytkownia!")]
-        [Display(Name = "Nazwisko")]
+        [Required(ErrorMessage = "LastNameError")]
+        [Display(Name = "LastName")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Podaj adres e-mail!")]
+        [Required(ErrorMessage = "EmailError")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Podaj hasło!")]
+        [Required(ErrorMessage = "PasswordError")]
         [DataType(DataType.Password)]
-        [Display(Name = "Hasło")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Wybierz typ użytkownika!")]
-        [Display(Name = "Rola")]
+        [Required(ErrorMessage = "RoleError")]
+        [Display(Name = "Role")]
         public string Role { get; set; }
         public string[]? Roles { get; set; }
     }

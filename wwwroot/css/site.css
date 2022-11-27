@@ -29,15 +29,6 @@ body {
     height: 80px !important;
     width: 120px;
 }
-ul {
-    list-style-type: none;
-}
-li {
-    list-style-type: none;
-}
-p{
-    margin: 0;
-}
 .center {
     align-items: center;
     display: block;

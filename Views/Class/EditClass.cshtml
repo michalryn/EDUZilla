@@ -4,7 +4,7 @@
 }
 
 <h1>Edytuj klasę</h1>
-<form method="post">
+<form method="post" asp-action="EditClass">
     <input type="hidden" name="ClassId" value="@Model.ClassId">
     <h2>Uczniowie należący do klasy @Model.Name</h2>
     <table class="table table-dark table-bordered table-responsive-sm">

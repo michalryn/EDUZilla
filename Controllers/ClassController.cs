@@ -2,6 +2,7 @@
 using EDUZilla.ViewModels.Class;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EDUZilla.Controllers
 {
@@ -70,14 +71,67 @@ namespace EDUZilla.Controllers
         [HttpPost]
         public async Task<IActionResult> EditClass(EditClassForm form)
         {
-            if(ModelState.IsValid)
+            if (form.AddStudent != null || form.DeleteStudent != null)
             {
+                //error handle
                 var result = await _classService.EditClassAsync(form);
 
                 return RedirectToAction("ViewClasses");
             }
 
             return await EditClass(form.ClassId);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IActionResult> EditTutor(int id)
+        {
+            EditTutorViewModel? model = await _classService.GetEditTutorViewModelAsync(id);
+
+            //error handle
+            if (model == null)
+            {
+                return RedirectToAction("ViewClasses");
+            }
+
+            model.AvailableTeachers.Insert(0, new SelectListItem() { Value = "", Text = "Wybierz nauczyciela", Selected = true });
+
+            return View("EditTutor", model);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> EditTutor(int id, string? teacher)
+        {
+            if (teacher == null)
+            {
+                return RedirectToAction("ViewClasses");
+            }
+
+            var result = await _classService.EditTutorAsync(id, teacher);
+
+            //handle error
+            if (!result)
+            {
+                return RedirectToAction("ViewClasses");
+            }
+
+            return await EditTutor(id);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> DeleteTutor(int id)
+        {
+            var result = await _classService.DeleteTutorAsync(id);
+
+            //handle error
+            if (!result)
+            {
+                return RedirectToAction("ViewClasses");
+            }
+
+            return await EditTutor(id);
         }
     }
 }
