@@ -1,9 +1,9 @@
 ﻿@using EDUZilla.ViewModels.Class;
 @{
-    ViewData["Title"] = "Klasy";
+    ViewData["Title"] = @languageResource["Classes"];
 }
 
-<h1>Klasy</h1>
+<h1>@languageResource["Classes"]</h1>
 <ul class="list-group mb-3">
     @if (Model != null)
     {
@@ -32,5 +32,5 @@
         <label class="form-label"></label>
         <input name="name" type="text" placeholder="Nazwa klasy" class="form-control" />
     </div>
-    <button type="submit" class="btn btn-primary">Stwórz klasę</button>
+    <button type="submit" class="btn btn-primary">@languageResource["CreateClass"]</button>
 </form>

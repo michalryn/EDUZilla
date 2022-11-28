@@ -4,8 +4,8 @@ namespace EDUZilla.ViewModels.Role
 {
     public class CreateRoleViewModel
     {
-        [Required(ErrorMessage = "Podaj nazwę roli!")]
-        [Display(Name = "Nazwa roli")]
+        [Required(ErrorMessage = "RoleNameError")]
+        [Display(Name = "RoleName")]
         public string RoleName { get; set; }
     }
 }
