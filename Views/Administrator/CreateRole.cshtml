@@ -1,10 +1,10 @@
 ﻿@using EDUZilla.ViewModels.Role
 @model CreateRoleViewModel
 @{
-    ViewData["Title"] = "Create new role";
+    ViewData["Title"] = @languageResource["CreateRole"];
 }
 
-<h1>Stwórz nową Rolę</h1>
+<h1>@languageResource["CreateRole"]</h1>
 
 <div class="row">
     <div class="col-md-12">
@@ -15,7 +15,11 @@
                 <input asp-for="RoleName" class="form-control"/>
                 <span asp-validation-for="RoleName" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Stwórz Rolę</button>
+            <button type="submit" class="btn btn-primary">@languageResource["CreateRole"]</button>
         </form>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

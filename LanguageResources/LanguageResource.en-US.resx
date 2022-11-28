@@ -132,8 +132,17 @@
   <data name="ChooseTutor" xml:space="preserve">
     <value>Choose tutor</value>
   </data>
+  <data name="Classes" xml:space="preserve">
+    <value>Klasy</value>
+  </data>
   <data name="ClassName" xml:space="preserve">
     <value>Class name</value>
+  </data>
+  <data name="CreateClass" xml:space="preserve">
+    <value>Create class</value>
+  </data>
+  <data name="CreateRole" xml:space="preserve">
+    <value>Create role</value>
   </data>
   <data name="CreateUser" xml:space="preserve">
     <value>Create user</value>
@@ -189,6 +198,12 @@
   <data name="RoleError" xml:space="preserve">
     <value>Please select user type!</value>
   </data>
+  <data name="RoleName" xml:space="preserve">
+    <value>Role name</value>
+  </data>
+  <data name="RoleNameError" xml:space="preserve">
+    <value>Please enter role name!</value>
+  </data>
   <data name="Student" xml:space="preserve">
     <value>Student</value>
   </data>
@@ -200,5 +215,11 @@
   </data>
   <data name="TutorName" xml:space="preserve">
     <value>Tutor</value>
+  </data>
+  <data name="ViewClasses" xml:space="preserve">
+    <value>View classes</value>
+  </data>
+  <data name="ViewStudents" xml:space="preserve">
+    <value>View students</value>
   </data>
 </root>

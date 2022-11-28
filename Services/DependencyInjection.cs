@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Localization;
 using System.Reflection;
 
+
 namespace EDUZilla.Services
 {
     public static class DependencyInjection

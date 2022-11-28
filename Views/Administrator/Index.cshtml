@@ -5,8 +5,7 @@
 }
 
 <h1>@languageResource["AdminPanel"]</h1>
-<a asp-action="CreateUser" class="btn btn-primary">Stwórz użytkownika</a>
-<a asp-action="CreateRole" class="btn btn-primary">Stwórz rolę</a>
-<a asp-action="AssignStudentToClass" class="btn btn-primary">Przydziel ucznia do klasy</a>
-<a asp-action="ViewStudents" class="btn btn-primary">Wyświetl uczniów</a>
-<a asp-controller="Class" asp-action="ViewClasses" class="btn btn-primary">Wyświetl klasy</a>
+<a asp-action="CreateUser" class="btn btn-primary">@languageResource["CreateUser"]</a>
+<a asp-action="CreateRole" class="btn btn-primary">@languageResource["CreateRole"]</a>
+<a asp-action="ViewStudents" class="btn btn-primary">@languageResource["ViewStudents"]</a>
+<a asp-controller="Class" asp-action="ViewClasses" class="btn btn-primary">@languageResource["ViewClasses"]</a>
