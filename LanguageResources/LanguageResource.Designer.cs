@@ -61,6 +61,15 @@ namespace EDUZilla.LanguageResources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Terminarz.
+        /// </summary>
+        public static string Calendar {
+            get {
+                return ResourceManager.GetString("Calendar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Adres email.
         /// </summary>
         public static string EmailAddress {
@@ -75,6 +84,15 @@ namespace EDUZilla.LanguageResources {
         public static string HomePage {
             get {
                 return ResourceManager.GetString("HomePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Język.
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
             }
         }
         
@@ -97,11 +115,47 @@ namespace EDUZilla.LanguageResources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wyloguj.
+        /// </summary>
+        public static string Logout {
+            get {
+                return ResourceManager.GetString("Logout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Oceny.
+        /// </summary>
+        public static string Marks {
+            get {
+                return ResourceManager.GetString("Marks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Średnia ocen.
+        /// </summary>
+        public static string MarksAverage {
+            get {
+                return ResourceManager.GetString("MarksAverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Hasło.
         /// </summary>
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Przedmiot.
+        /// </summary>
+        public static string Subject {
+            get {
+                return ResourceManager.GetString("Subject", resourceCulture);
             }
         }
     }
