@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Calendar" xml:space="preserve">
+    <value>Terminarz</value>
+  </data>
   <data name="EmailAddress" xml:space="preserve">
     <value>Adres email</value>
   </data>
   <data name="HomePage" xml:space="preserve">
     <value>Strona główna</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Język</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Zaloguj</value>
@@ -129,7 +135,19 @@
   <data name="LoginHeader" xml:space="preserve">
     <value>LOGOWANIE</value>
   </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Wyloguj</value>
+  </data>
+  <data name="Marks" xml:space="preserve">
+    <value>Oceny</value>
+  </data>
+  <data name="MarksAverage" xml:space="preserve">
+    <value>Średnia ocen</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Hasło</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Przedmiot</value>
   </data>
 </root>

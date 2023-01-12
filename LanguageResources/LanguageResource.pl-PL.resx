@@ -129,6 +129,9 @@
   <data name="Back" xml:space="preserve">
     <value>Wróć</value>
   </data>
+  <data name="Calendar" xml:space="preserve">
+    <value>Terminarz</value>
+  </data>
   <data name="ChooseTutor" xml:space="preserve">
     <value>Wybierz wychowawcę</value>
   </data>
@@ -165,6 +168,9 @@
   <data name="HomePage" xml:space="preserve">
     <value>Strona główna</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Język</value>
+  </data>
   <data name="LastName" xml:space="preserve">
     <value>Nazwisko</value>
   </data>
@@ -176,6 +182,15 @@
   </data>
   <data name="LoginHeader" xml:space="preserve">
     <value>LOGOWANIE</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Wyloguj</value>
+  </data>
+  <data name="Marks" xml:space="preserve">
+    <value>Oceny</value>
+  </data>
+  <data name="MarksAverage" xml:space="preserve">
+    <value>Średnia ocen</value>
   </data>
   <data name="NoTutor" xml:space="preserve">
     <value>Brak wychowawcy</value>
@@ -206,6 +221,9 @@
   </data>
   <data name="Student" xml:space="preserve">
     <value>Uczeń</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Przedmiot</value>
   </data>
   <data name="Teacher" xml:space="preserve">
     <value>Nauczyciel</value>
