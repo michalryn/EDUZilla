@@ -21,6 +21,34 @@ namespace EDUZilla.Controllers
         }
 
         [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IActionResult> EditCourse(int id)
+        {
+            var course = await _courseService.GetEditCourseViewModel(id);
+
+            if(course == null)
+            {
+                return View();
+            }
+
+            return View(course);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> DeleteCourse(int id)
+        {
+            var result = await _courseService.DeleteCourseByIdAsync(id);
+
+            if(!result)
+            {
+                return RedirectToAction("ViewCourses");
+            }
+
+            return RedirectToAction("ViewCourses");
+        }
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> AddCourse(string name)
         {

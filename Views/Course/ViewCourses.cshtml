@@ -5,18 +5,18 @@
 }
 
 <form method="post" asp-controller="Course" asp-action="AddCourse">
-    <div class="mb-3">
-        <label class="form-label"></label>
-        <input name="name" type="text" placeholder="Nazwa przedmotu" class="form-control" />
+    <div class="input-group mb-3">
+        <label class="input-group-text">Dodaj przedmiot</label>
+        <input name="name" type="text" placeholder="Nazwa przedmiotu" class="form-control" />
+        <button type="submit" class="btn btn-primary">Dodaj</button>
     </div>
-    <button type="submit" class="btn btn-primary">Dodaj</button>
 </form>
 
 <table class="table">
     <thead>
         <tr>
             <th scope="col">Nazwa</th>
-            <th scope="col">Akcja</th>
+            <th scope="col">Edytuj</th>
         </tr>
     </thead>
     <tbody>
@@ -24,7 +24,7 @@
         {
             <tr>
                 <td>@course.Name</td>
-                <td><a>Edytuj</a></td>
+                <td><a asp-action="EditCourse" asp-route-id="@course.Id">Edytuj</a></td>
             </tr>
         }
     </tbody>
