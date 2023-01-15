@@ -25,6 +25,7 @@ namespace EDUZilla.Controllers
         public async Task<IActionResult> ViewClasses()
         {
             List<ClassListViewModel> list = await _classService.GetClassesListAsync();
+
             return View(list);
         }
 

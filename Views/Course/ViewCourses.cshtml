@@ -1,0 +1,31 @@
+﻿@using EDUZilla.ViewModels.Course
+
+@{
+    ViewData["Title"] = "Przedmioty";
+}
+
+<form method="post" asp-controller="Course" asp-action="AddCourse">
+    <div class="mb-3">
+        <label class="form-label"></label>
+        <input name="name" type="text" placeholder="Nazwa przedmotu" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Dodaj</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Nazwa</th>
+            <th scope="col">Akcja</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(CourseListViewModel course in Model)
+        {
+            <tr>
+                <td>@course.Name</td>
+                <td><a>Edytuj</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

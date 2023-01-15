@@ -51,16 +51,18 @@ namespace EDUZilla.Services
         public async Task<StudentAddParentViewModel> GetStudentAddParentAsync(string id)
         {
             var student = await _studentRepository.GetByIdAsync(id);
-            var parent = await _parentRepository.GetByIdAsync(student.ParentId);
+
+            var parent = student.ParentId != null ? await _parentRepository.GetByIdAsync(student.ParentId) : null;
+
             StudentAddParentViewModel studentViewModel = new StudentAddParentViewModel()
             {
                 Id = student.Id,
                 Email = student.Email,
                 FirstName = student.FirstName,
                 LastName = student.LastName,
-                ParentId = parent.Id,
-                ParentFirstName = parent.FirstName,
-                ParentLastName = parent.LastName
+                ParentId = parent?.Id,
+                ParentFirstName = parent?.FirstName,
+                ParentLastName = parent?.LastName
             };
 
             return studentViewModel;
