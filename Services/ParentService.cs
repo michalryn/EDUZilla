@@ -8,7 +8,7 @@ namespace EDUZilla.Services
     {
         #region Properties
 
-        public readonly ParentRepository _parentRepository;
+        private readonly ParentRepository _parentRepository;
 
         #endregion
 

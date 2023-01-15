@@ -36,20 +36,22 @@ namespace EDUZilla.Services
         public async Task<List<ClassListViewModel>> GetClassesListAsync()
         {
             var result = await _classRepository.GetClasses().ToListAsync();
-            List<ClassListViewModel> classList = null;
-            if (result.Any())
+            List<ClassListViewModel> classList = new List<ClassListViewModel>();
+
+            if (!result.Any())
             {
-                classList = new List<ClassListViewModel>();
-                foreach (var item in result)
+                return classList;
+            }
+
+            foreach (var item in result)
+            {
+                int studentsCount = item.Students?.Count ?? 0;
+                classList.Add(new ClassListViewModel
                 {
-                    int studentsCount = item.Students?.Count ?? 0;
-                    classList.Add(new ClassListViewModel
-                    {
-                        Id = item.Id,
-                        Name = item.Name,
-                        Count = studentsCount
-                    });
-                }
+                    Id = item.Id,
+                    Name = item.Name,
+                    Count = studentsCount
+                });
             }
 
             return classList;
