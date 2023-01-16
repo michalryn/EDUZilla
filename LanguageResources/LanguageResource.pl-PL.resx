@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Dodaj</value>
+  </data>
+  <data name="AddParent" xml:space="preserve">
+    <value>Dodaj rodzica</value>
+  </data>
   <data name="Admin" xml:space="preserve">
     <value>Administrator</value>
   </data>
@@ -131,6 +137,9 @@
   </data>
   <data name="Calendar" xml:space="preserve">
     <value>Terminarz</value>
+  </data>
+  <data name="ChooseTeacher" xml:space="preserve">
+    <value>Wybierz nauczyciela</value>
   </data>
   <data name="ChooseTutor" xml:space="preserve">
     <value>Wybierz wychowawcę</value>
@@ -149,6 +158,18 @@
   </data>
   <data name="CreateUser" xml:space="preserve">
     <value>Stwórz użytkownika</value>
+  </data>
+  <data name="CurrentClassTutor" xml:space="preserve">
+    <value>Obecny wychowawca klasy</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Usuń</value>
+  </data>
+  <data name="DeleteTutor" xml:space="preserve">
+    <value>Usuń wychowawce</value>
+  </data>
+  <data name="EditClass" xml:space="preserve">
+    <value>Edytuj klasę</value>
   </data>
   <data name="EmailAddress" xml:space="preserve">
     <value>Adres email</value>
@@ -192,6 +213,9 @@
   <data name="MarksAverage" xml:space="preserve">
     <value>Średnia ocen</value>
   </data>
+  <data name="NoClassesInSystem" xml:space="preserve">
+    <value>Brak klasy w systemie</value>
+  </data>
   <data name="NoTutor" xml:space="preserve">
     <value>Brak wychowawcy</value>
   </data>
@@ -219,8 +243,23 @@
   <data name="RoleNameError" xml:space="preserve">
     <value>Podaj nazwę roli!</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Zapisz</value>
+  </data>
   <data name="Student" xml:space="preserve">
     <value>Uczeń</value>
+  </data>
+  <data name="StudentId" xml:space="preserve">
+    <value>Id studenta</value>
+  </data>
+  <data name="Students" xml:space="preserve">
+    <value>Uczniowie</value>
+  </data>
+  <data name="StudentsBelongingToClass" xml:space="preserve">
+    <value>Uczniowie należący do klasy</value>
+  </data>
+  <data name="StudentsNotAssigned" xml:space="preserve">
+    <value>Uczniowi nieprzypisani do żadnej klasy</value>
   </data>
   <data name="Subject" xml:space="preserve">
     <value>Przedmiot</value>

@@ -95,7 +95,7 @@ namespace EDUZilla.Controllers
                 return RedirectToAction("ViewClasses");
             }
 
-            model.AvailableTeachers.Insert(0, new SelectListItem() { Value = "", Text = "Wybierz nauczyciela", Selected = true });
+           
 
             return View("EditTutor", model);
         }

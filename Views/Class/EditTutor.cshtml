@@ -6,10 +6,10 @@
     ViewData["Title"] = "Zmień wychowawce";
 }
 
-<h1>Wychowawca</h1>
+<h1>@languageResource["TutorName"]</h1>
 
 <p class="mb-3">
-    <b>Aktualny wychowawca klasy @Model.ClassName: </b>@if (Model.TutorId == null)
+    <b>@languageResource["CurrentClassTutor"] @Model.ClassName: </b>@if (Model.TutorId == null)
     {
         @languageResource["NoTutor"]
         ;
@@ -24,17 +24,19 @@
 @if (Model.TutorId != null)
 {
     <form method="post" asp-action="DeleteTutor">
-        <button value="@Model.ClassId" name="id" type="submit" class="btn btn-danger mb-3">Usuń wychowawcę</button>
+        <button value="@Model.ClassId" name="id" type="submit" class="btn btn-danger mb-3">@languageResource["DeleteTutor"]</button>
     </form>
 }
-
+@{
+     Model.AvailableTeachers.Insert(0, new SelectListItem() { Value = "", Text = languageResource["ChooseTeacher"], Selected = true });
+}
 
 <form method="post" asp-action="EditTutor">
     <input type="hidden" name="id" value="@Model.ClassId" />
     <div class="mb-3">
-        <label class="form-label">Wybierz nauczyciela</label>
+        <label class="form-label">@languageResource["ChooseTeacher"]</label>
         <select class="form-select" asp-items="Model.AvailableTeachers" name="teacher"></select>
     </div>
 
-    <button type="submit" class="btn btn-primary">Zapisz</button>
+    <button type="submit" class="btn btn-primary">@languageResource["Save"]</button>
 </form>
