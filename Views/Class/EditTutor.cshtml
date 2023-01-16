@@ -27,7 +27,9 @@
         <button value="@Model.ClassId" name="id" type="submit" class="btn btn-danger mb-3">@languageResource["DeleteTutor"]</button>
     </form>
 }
-
+@{
+     Model.AvailableTeachers.Insert(0, new SelectListItem() { Value = "", Text = languageResource["ChooseTeacher"], Selected = true });
+}
 
 <form method="post" asp-action="EditTutor">
     <input type="hidden" name="id" value="@Model.ClassId" />
