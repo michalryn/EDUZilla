@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AddParent" xml:space="preserve">
+    <value>Add parent</value>
+  </data>
   <data name="Admin" xml:space="preserve">
     <value>Admin</value>
   </data>
@@ -132,11 +138,14 @@
   <data name="Calendar" xml:space="preserve">
     <value>Calendar</value>
   </data>
+  <data name="ChooseTeacher" xml:space="preserve">
+    <value>Choose teacher</value>
+  </data>
   <data name="ChooseTutor" xml:space="preserve">
     <value>Choose tutor</value>
   </data>
   <data name="Classes" xml:space="preserve">
-    <value>Klasy</value>
+    <value>Classes</value>
   </data>
   <data name="ClassName" xml:space="preserve">
     <value>Class name</value>
@@ -149,6 +158,18 @@
   </data>
   <data name="CreateUser" xml:space="preserve">
     <value>Create user</value>
+  </data>
+  <data name="CurrentClassTutor" xml:space="preserve">
+    <value>Current class tutor</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteTutor" xml:space="preserve">
+    <value>Delete tutor</value>
+  </data>
+  <data name="EditClass" xml:space="preserve">
+    <value>Edit class</value>
   </data>
   <data name="EmailAddress" xml:space="preserve">
     <value>Email address</value>
@@ -192,6 +213,9 @@
   <data name="MarksAverage" xml:space="preserve">
     <value>Marks average</value>
   </data>
+  <data name="NoClassesInSystem" xml:space="preserve">
+    <value>No classes in system</value>
+  </data>
   <data name="NoTutor" xml:space="preserve">
     <value>No tutor</value>
   </data>
@@ -219,8 +243,23 @@
   <data name="RoleNameError" xml:space="preserve">
     <value>Please enter role name!</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="Student" xml:space="preserve">
     <value>Student</value>
+  </data>
+  <data name="StudentId" xml:space="preserve">
+    <value>Student Id</value>
+  </data>
+  <data name="Students" xml:space="preserve">
+    <value>Students</value>
+  </data>
+  <data name="StudentsBelongingToClass" xml:space="preserve">
+    <value>Students belonging to class</value>
+  </data>
+  <data name="StudentsNotAssigned" xml:space="preserve">
+    <value>Students not assigned to any class</value>
   </data>
   <data name="Subject" xml:space="preserve">
     <value>Subject</value>
