@@ -120,6 +120,9 @@
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="AddCourse" xml:space="preserve">
+    <value>Add course</value>
+  </data>
   <data name="AddParent" xml:space="preserve">
     <value>Add parent</value>
   </data>
@@ -138,6 +141,9 @@
   <data name="Calendar" xml:space="preserve">
     <value>Calendar</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="ChooseTeacher" xml:space="preserve">
     <value>Choose teacher</value>
   </data>
@@ -150,6 +156,9 @@
   <data name="ClassName" xml:space="preserve">
     <value>Class name</value>
   </data>
+  <data name="CourseName" xml:space="preserve">
+    <value>Course's name</value>
+  </data>
   <data name="CreateClass" xml:space="preserve">
     <value>Create class</value>
   </data>
@@ -160,13 +169,19 @@
     <value>Create user</value>
   </data>
   <data name="CurrentClassTutor" xml:space="preserve">
-    <value>Current class tutor</value>
+    <value>Current tutor of class</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="DeleteSubject" xml:space="preserve">
+    <value>Do you want to delete a subject</value>
+  </data>
   <data name="DeleteTutor" xml:space="preserve">
     <value>Delete tutor</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
   </data>
   <data name="EditClass" xml:space="preserve">
     <value>Edit class</value>
@@ -212,6 +227,9 @@
   </data>
   <data name="MarksAverage" xml:space="preserve">
     <value>Marks average</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="NoClassesInSystem" xml:space="preserve">
     <value>No classes in system</value>
@@ -272,6 +290,9 @@
   </data>
   <data name="TutorName" xml:space="preserve">
     <value>Tutor</value>
+  </data>
+  <data name="UndoAction" xml:space="preserve">
+    <value>You can't undo this action</value>
   </data>
   <data name="ViewClasses" xml:space="preserve">
     <value>View classes</value>
