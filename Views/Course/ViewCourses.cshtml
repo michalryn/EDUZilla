@@ -6,17 +6,17 @@
 
 <form method="post" asp-controller="Course" asp-action="AddCourse">
     <div class="input-group mb-3">
-        <label class="input-group-text">Dodaj przedmiot</label>
-        <input name="name" type="text" placeholder="Nazwa przedmiotu" class="form-control" />
-        <button type="submit" class="btn btn-primary">Dodaj</button>
+        <label class="input-group-text">@languageResource["AddCourse"]</label>
+        <input name="name" type="text" placeholder="@languageResource["CourseName"]" class="form-control" />
+        <button type="submit" class="btn btn-primary">@languageResource["Add"]</button>
     </div>
 </form>
 
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Nazwa</th>
-            <th scope="col">Edytuj</th>
+            <th scope="col">@languageResource["Name"]</th>
+            <th scope="col">@languageResource["Edit"]</th>
         </tr>
     </thead>
     <tbody>
@@ -24,7 +24,7 @@
         {
             <tr>
                 <td>@course.Name</td>
-                <td><a asp-action="EditCourse" asp-route-id="@course.Id">Edytuj</a></td>
+                <td><a asp-action="EditCourse" asp-route-id="@course.Id">@languageResource["Edit"]</a></td>
             </tr>
         }
     </tbody>
