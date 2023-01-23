@@ -35,3 +35,11 @@ body {
     margin: 0 auto;
     text-align: center;
 }
+.color-header {
+    --bs-bg-opacity: 1;
+    background-color: #dcbefe !important;
+}
+.color-body {
+    --bs-bg-opacity: 1;
+    background-color: #f4eaff !important;
+}
