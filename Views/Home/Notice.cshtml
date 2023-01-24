@@ -4,6 +4,25 @@
 @{
     ViewData["Title"] = @languageResource["Announcements"];
 }
+
 <div>
-    <h1>@languageResource["Announcements"]:</h1>
+    <div class="d-flex align-items-center mb-4">
+        <div class="float-start">
+            <h1><b>@languageResource["Announcements"]:</b></h1>
+        </div>
+        <div class="ms-auto">                
+            <button class="btn btn-primary">@languageResource["AddAnnouncement"] <i class="fa-regular fa-square-plus"></i></button>                       
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header color-header">
+            <h2><b>Featured</b></h2>
+        </div>
+        <div class="card-body color-body">
+            <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h5>
+            <br />
+            <i class="card-text bottom-100">Jan Kowalski - 2023r</i>
+        </div>
+    </div>
 </div>
