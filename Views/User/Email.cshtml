@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Manage Email";
+}
+
+<h3>Manage Email</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        <form id="email-form" method="post" novalidate="novalidate">
+            <div class="text-danger validation-summary-valid" role="alert" data-valmsg-summary="true">
+                <ul>
+                    <li style="display:none"></li>
+                </ul>
+            </div>
+            <div class="form-floating py-1">
+                <input class="form-control" disabled="" type="text" id="Email" name="Email" value="@User.Identity?.Name">
+                <label class="form-label" for="Email">Email</label>
+                
+            </div>
+
+            <div class="form-floating py-1">
+                <input class="form-control" autocomplete="email" aria-required="true" type="email" data-val="true" data-val-email="The New email field is not a valid e-mail address." data-val-required="The New email field is required." id="Input_NewEmail" name="Input.NewEmail" value="@User.Identity?.Name">
+                <label class="form-label" for="Input_NewEmail">New email</label>
+                <span class="text-danger field-validation-valid"></span>
+            </div>
+            
+            <div class="py-1">
+                <button id="change-email-button" type="submit" class="w-100 btn btn-lg btn-primary">Change email</button>
+            </div>
+            <button id="email-verification" type="submit" class="btn btn-link">Send verification email</button>
+            
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

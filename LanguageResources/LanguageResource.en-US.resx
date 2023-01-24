@@ -225,6 +225,12 @@
   <data name="Logout" xml:space="preserve">
     <value>Logout</value>
   </data>
+  <data name="ManageAccount" xml:space="preserve">
+    <value>Manage Acoount</value>
+  </data>
+  <data name="ManageYourAccount" xml:space="preserve">
+    <value>Manage your account</value>
+  </data>
   <data name="Marks" xml:space="preserve">
     <value>Marks</value>
   </data>
@@ -248,6 +254,9 @@
   </data>
   <data name="PasswordError" xml:space="preserve">
     <value>Please enter password!</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember me</value>
