@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@using EDUZilla.ViewModels.User
+@model ChangeEmailViewModel
+@{
+    ViewData["Title"] = "Manage Email";
+}
+
+<h3>@languageResource["ManageEmail"]</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        <form id="email-form" method="post" novalidate="novalidate">
+            <div class="text-danger validation-summary-valid" role="alert" data-valmsg-summary="true">
+                <ul>
+                    <li style="display:none"></li>
+                </ul>
+            </div>
+            <div class="form-floating py-1">
+                <input class="form-control" disabled="" type="text" id="Email" name="Email" value="@User.Identity?.Name">
+                <label class="form-label" for="Email">Email</label>
+                
+            </div>
+
+            <div class="form-floating py-1">
+                <input asp-for="NewEmail" class="form-control" aria-required="true" type="email">
+                <label asp-for="NewEmail" class="form-label">@languageResource["NewEmail"]</label>
+                <span asp-validation-for="NewEmail" class="text-danger field-validation-valid"></span>
+            </div>
+            
+            <div class="py-1">
+                <button id="change-email-button" type="submit" class="w-100 btn btn-lg btn-primary">@languageResource["ChangeEmail"]</button>
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

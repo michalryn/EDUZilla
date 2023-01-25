@@ -147,6 +147,12 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="ChangeEmail" xml:space="preserve">
+    <value>Change email</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
   <data name="ChooseTeacher" xml:space="preserve">
     <value>Choose teacher</value>
   </data>
@@ -158,6 +164,9 @@
   </data>
   <data name="ClassName" xml:space="preserve">
     <value>Class name</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Confirm new password</value>
   </data>
   <data name="CourseName" xml:space="preserve">
     <value>Course's name</value>
@@ -173,6 +182,9 @@
   </data>
   <data name="CurrentClassTutor" xml:space="preserve">
     <value>Current tutor of class</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Current password</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
@@ -201,6 +213,9 @@
   <data name="FirstNameError" xml:space="preserve">
     <value>Please enter user firstname!</value>
   </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Forgot password</value>
+  </data>
   <data name="Grades" xml:space="preserve">
     <value>Grades</value>
   </data>
@@ -216,6 +231,9 @@
   <data name="LastNameError" xml:space="preserve">
     <value>Please enter user lastname!</value>
   </data>
+  <data name="LinkToChange" xml:space="preserve">
+    <value>Send a link to your mail in order to change password</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
   </data>
@@ -225,6 +243,15 @@
   <data name="Logout" xml:space="preserve">
     <value>Logout</value>
   </data>
+  <data name="ManageAccount" xml:space="preserve">
+    <value>Manage Acoount</value>
+  </data>
+  <data name="ManageEmail" xml:space="preserve">
+    <value>Manage email</value>
+  </data>
+  <data name="ManageYourAccount" xml:space="preserve">
+    <value>Manage your account</value>
+  </data>
   <data name="Marks" xml:space="preserve">
     <value>Marks</value>
   </data>
@@ -233,6 +260,12 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="NewEmail" xml:space="preserve">
+    <value>New email</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
   </data>
   <data name="NoClassesInSystem" xml:space="preserve">
     <value>No classes in system</value>
@@ -248,6 +281,12 @@
   </data>
   <data name="PasswordError" xml:space="preserve">
     <value>Please enter password!</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="ProvideEmail" xml:space="preserve">
+    <value>Provide email</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember me</value>
@@ -296,6 +335,12 @@
   </data>
   <data name="UndoAction" xml:space="preserve">
     <value>You can't undo this action</value>
+  </data>
+  <data name="UpdatePassword" xml:space="preserve">
+    <value>Update password</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username</value>
   </data>
   <data name="ViewClasses" xml:space="preserve">
     <value>View classes</value>
