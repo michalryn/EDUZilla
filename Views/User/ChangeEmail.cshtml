@@ -1,5 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject UserManager<ApplicationUser> UserManager
+@using EDUZilla.ViewModels.User
+@model ChangeEmailViewModel
 @{
     ViewData["Title"] = "Manage Email";
 }
@@ -21,15 +23,14 @@
             </div>
 
             <div class="form-floating py-1">
-                <input class="form-control" autocomplete="email" aria-required="true" type="email" data-val="true" data-val-email="The New email field is not a valid e-mail address." data-val-required="The New email field is required." id="Input_NewEmail" name="Input.NewEmail" value="@User.Identity?.Name">
-                <label class="form-label" for="Input_NewEmail">New email</label>
-                <span class="text-danger field-validation-valid"></span>
+                <input asp-for="NewEmail" class="form-control" aria-required="true" type="email">
+                <label asp-for="NewEmail" class="form-label">New email</label>
+                <span asp-validation-for="NewEmail" class="text-danger field-validation-valid"></span>
             </div>
             
             <div class="py-1">
                 <button id="change-email-button" type="submit" class="w-100 btn btn-lg btn-primary">Change email</button>
             </div>
-            <button id="email-verification" type="submit" class="btn btn-link">Send verification email</button>
             
         </form>
     </div>

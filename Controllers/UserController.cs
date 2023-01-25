@@ -5,6 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 using System.Text.Encodings.Web;
+using System.Threading.Tasks;
+using SendGrid;
+using SendGrid.Helpers.Mail;
+using EDUZilla.ViewModels.User;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EDUZilla.Controllers
 {
@@ -30,53 +35,102 @@ namespace EDUZilla.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel changePasswordViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    return View();
+                }
+                var changePasswordResult = await _userManager.ChangePasswordAsync(user, changePasswordViewModel.OldPassword, changePasswordViewModel.Password);
+                if (!changePasswordResult.Succeeded)
+                {
+                    foreach (var error in changePasswordResult.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
+                await _signInManager.RefreshSignInAsync(user);
+
+
+            }
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
         public IActionResult Password()
         {
             return View();
         }
 
-
-
         [HttpPost]
-        public async Task<ActionResult> RemindPassword()
+        public async Task<ActionResult> Password(String w)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
                 return View();
             }
-            var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-            if(code == null)
-            {
-                return View();
-            }
-            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
             var callbackUrl = Url.Page(
-                "/Account/ResetPassword",
+                "/Views/User/ChangePassword",
                 pageHandler: null,
-                values: new { area = "Identity", code },
+                values: new { area = "Identity" },
                 protocol: Request.Scheme);
 
             await _emailSender.SendEmailAsync(
                 user.Email,
-                "Reset Password",
-                $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                "Change password",
+                $"Please change your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
 
             return View();
-
         }
-
-        public async Task<ActionResult> ChangePassword(string OldPassword,string NewPassword)
+        [HttpGet]
+        public IActionResult ChangeEmail()
         {
-            var user = await _userManager.GetUserAsync(User);               
-            if (user == null)
-            {
-                return View();
-            }
-            var changePasswordResult = await _userManager.ChangePasswordAsync(user, OldPassword, NewPassword);
-            await _signInManager.RefreshSignInAsync(user);
-
             return View();
         }
+        [HttpPost]
+        public async Task<ActionResult> ChangeEmail(ChangeEmailViewModel changeEmailViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    return View();
+                }
+                if (changeEmailViewModel.NewEmail != user.Email)
+                {
+                    var code = await _userManager.GenerateChangeEmailTokenAsync(user, changeEmailViewModel.NewEmail);
+                    var changeEmailResult = await _userManager.ChangeEmailAsync(user, changeEmailViewModel.NewEmail, code);
+                    if (!changeEmailResult.Succeeded)
+                    {
+                        foreach (var error in changeEmailResult.Errors)
+                        {
+                            ModelState.AddModelError(string.Empty, error.Description);
+                        }
+                    }
+                    await _signInManager.RefreshSignInAsync(user);
+
+
+                    return RedirectToAction("Index");
+                }
+
+
+            }
+            return View();
+        }
+        
+
+
     }
 }

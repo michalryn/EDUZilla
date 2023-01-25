@@ -147,6 +147,9 @@
   <data name="Cancel" xml:space="preserve">
     <value>Anuluj</value>
   </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Zmień hasło</value>
+  </data>
   <data name="ChooseTeacher" xml:space="preserve">
     <value>Wybierz nauczyciela</value>
   </data>
@@ -158,6 +161,9 @@
   </data>
   <data name="ClassName" xml:space="preserve">
     <value>Nazwa klasy</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Potwierdź nowe hasło</value>
   </data>
   <data name="CourseName" xml:space="preserve">
     <value>Nazwa przedmiotu</value>
@@ -173,6 +179,9 @@
   </data>
   <data name="CurrentClassTutor" xml:space="preserve">
     <value>Obecny wychowawca klasy</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Obecne hasło</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Usuń</value>
@@ -200,6 +209,9 @@
   </data>
   <data name="FirstNameError" xml:space="preserve">
     <value>Podaj imię użytkownika!</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Zapomniałeś hasła</value>
   </data>
   <data name="Grades" xml:space="preserve">
     <value>Oceny</value>
@@ -239,6 +251,9 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>Nazwa</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Nowe hasło</value>
   </data>
   <data name="NoClassesInSystem" xml:space="preserve">
     <value>Brak klasy w systemie</value>
@@ -305,6 +320,9 @@
   </data>
   <data name="UndoAction" xml:space="preserve">
     <value>Tej akcji nie będzie można cofnąć</value>
+  </data>
+  <data name="UpdatePassword" xml:space="preserve">
+    <value>Zaaktualizuj hasło</value>
   </data>
   <data name="ViewClasses" xml:space="preserve">
     <value>Wyświetl klasy</value>

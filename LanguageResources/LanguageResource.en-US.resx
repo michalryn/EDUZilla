@@ -147,6 +147,9 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
   <data name="ChooseTeacher" xml:space="preserve">
     <value>Choose teacher</value>
   </data>
@@ -158,6 +161,9 @@
   </data>
   <data name="ClassName" xml:space="preserve">
     <value>Class name</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Confirm new password</value>
   </data>
   <data name="CourseName" xml:space="preserve">
     <value>Course's name</value>
@@ -173,6 +179,9 @@
   </data>
   <data name="CurrentClassTutor" xml:space="preserve">
     <value>Current tutor of class</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Current password</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
@@ -200,6 +209,9 @@
   </data>
   <data name="FirstNameError" xml:space="preserve">
     <value>Please enter user firstname!</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Forgot password</value>
   </data>
   <data name="Grades" xml:space="preserve">
     <value>Grades</value>
@@ -239,6 +251,9 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
   </data>
   <data name="NoClassesInSystem" xml:space="preserve">
     <value>No classes in system</value>
@@ -305,6 +320,9 @@
   </data>
   <data name="UndoAction" xml:space="preserve">
     <value>You can't undo this action</value>
+  </data>
+  <data name="UpdatePassword" xml:space="preserve">
+    <value>Update password</value>
   </data>
   <data name="ViewClasses" xml:space="preserve">
     <value>View classes</value>
