@@ -15,5 +15,6 @@ namespace EDUZilla.Models
         public string Name { get; set; }
         public virtual ICollection<Teacher>? Teachers { get; set; }
         public virtual ICollection<Class>? Classes { get; set; }
+        public virtual ICollection<Grade>? Grades { get; set; }
     }
 }
