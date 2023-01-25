@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AddAnnouncement" xml:space="preserve">
+    <value>Add announcement</value>
+  </data>
+  <data name="AddCourse" xml:space="preserve">
+    <value>Add course</value>
+  </data>
+  <data name="AddParent" xml:space="preserve">
+    <value>Add parent</value>
+  </data>
   <data name="Admin" xml:space="preserve">
     <value>Admin</value>
   </data>
@@ -132,14 +144,32 @@
   <data name="Calendar" xml:space="preserve">
     <value>Calendar</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ChangeEmail" xml:space="preserve">
+    <value>Change email</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="ChooseTeacher" xml:space="preserve">
+    <value>Choose teacher</value>
+  </data>
   <data name="ChooseTutor" xml:space="preserve">
     <value>Choose tutor</value>
   </data>
   <data name="Classes" xml:space="preserve">
-    <value>Klasy</value>
+    <value>Classes</value>
   </data>
   <data name="ClassName" xml:space="preserve">
     <value>Class name</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Confirm new password</value>
+  </data>
+  <data name="CourseName" xml:space="preserve">
+    <value>Course's name</value>
   </data>
   <data name="CreateClass" xml:space="preserve">
     <value>Create class</value>
@@ -149,6 +179,27 @@
   </data>
   <data name="CreateUser" xml:space="preserve">
     <value>Create user</value>
+  </data>
+  <data name="CurrentClassTutor" xml:space="preserve">
+    <value>Current tutor of class</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteSubject" xml:space="preserve">
+    <value>Do you want to delete a subject</value>
+  </data>
+  <data name="DeleteTutor" xml:space="preserve">
+    <value>Delete tutor</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EditClass" xml:space="preserve">
+    <value>Edit class</value>
   </data>
   <data name="EmailAddress" xml:space="preserve">
     <value>Email address</value>
@@ -161,6 +212,9 @@
   </data>
   <data name="FirstNameError" xml:space="preserve">
     <value>Please enter user firstname!</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Forgot password</value>
   </data>
   <data name="Grades" xml:space="preserve">
     <value>Grades</value>
@@ -177,6 +231,9 @@
   <data name="LastNameError" xml:space="preserve">
     <value>Please enter user lastname!</value>
   </data>
+  <data name="LinkToChange" xml:space="preserve">
+    <value>Send a link to your mail in order to change password</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
   </data>
@@ -186,11 +243,32 @@
   <data name="Logout" xml:space="preserve">
     <value>Logout</value>
   </data>
+  <data name="ManageAccount" xml:space="preserve">
+    <value>Manage Acoount</value>
+  </data>
+  <data name="ManageEmail" xml:space="preserve">
+    <value>Manage email</value>
+  </data>
+  <data name="ManageYourAccount" xml:space="preserve">
+    <value>Manage your account</value>
+  </data>
   <data name="Marks" xml:space="preserve">
     <value>Marks</value>
   </data>
   <data name="MarksAverage" xml:space="preserve">
     <value>Marks average</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NewEmail" xml:space="preserve">
+    <value>New email</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="NoClassesInSystem" xml:space="preserve">
+    <value>No classes in system</value>
   </data>
   <data name="NoTutor" xml:space="preserve">
     <value>No tutor</value>
@@ -203,6 +281,12 @@
   </data>
   <data name="PasswordError" xml:space="preserve">
     <value>Please enter password!</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="ProvideEmail" xml:space="preserve">
+    <value>Provide email</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember me</value>
@@ -219,8 +303,23 @@
   <data name="RoleNameError" xml:space="preserve">
     <value>Please enter role name!</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="Student" xml:space="preserve">
     <value>Student</value>
+  </data>
+  <data name="StudentId" xml:space="preserve">
+    <value>Student Id</value>
+  </data>
+  <data name="Students" xml:space="preserve">
+    <value>Students</value>
+  </data>
+  <data name="StudentsBelongingToClass" xml:space="preserve">
+    <value>Students belonging to class</value>
+  </data>
+  <data name="StudentsNotAssigned" xml:space="preserve">
+    <value>Students not assigned to any class</value>
   </data>
   <data name="Subject" xml:space="preserve">
     <value>Subject</value>
@@ -233,6 +332,15 @@
   </data>
   <data name="TutorName" xml:space="preserve">
     <value>Tutor</value>
+  </data>
+  <data name="UndoAction" xml:space="preserve">
+    <value>You can't undo this action</value>
+  </data>
+  <data name="UpdatePassword" xml:space="preserve">
+    <value>Update password</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username</value>
   </data>
   <data name="ViewClasses" xml:space="preserve">
     <value>View classes</value>

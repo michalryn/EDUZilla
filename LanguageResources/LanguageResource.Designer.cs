@@ -61,6 +61,15 @@ namespace EDUZilla.LanguageResources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dodaj rodzica.
+        /// </summary>
+        public static string AddParent {
+            get {
+                return ResourceManager.GetString("AddParent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Terminarz.
         /// </summary>
         public static string Calendar {
@@ -147,6 +156,15 @@ namespace EDUZilla.LanguageResources {
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Id studenta.
+        /// </summary>
+        public static string StudentId {
+            get {
+                return ResourceManager.GetString("StudentId", resourceCulture);
             }
         }
         

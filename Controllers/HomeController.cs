@@ -3,10 +3,12 @@ using EDUZilla.Models;
 using EDUZilla.ViewModels.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 using System.Diagnostics;
 using System.Security.Claims;
+using System.Text.Encodings.Web;
 
 namespace EDUZilla.Controllers
 {
@@ -14,11 +16,14 @@ namespace EDUZilla.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly SignInManager<ApplicationUser> _signInManager;
-
-        public HomeController(ILogger<HomeController> logger, SignInManager<ApplicationUser> signInManager)
+        private readonly IEmailSender _emailSender;
+        private readonly UserManager<ApplicationUser> _userManager;
+        public HomeController(ILogger<HomeController> logger, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
             _signInManager = signInManager;
+            _emailSender = emailSender;
+            _userManager = userManager;
         }
 
         [HttpGet]
@@ -72,6 +77,57 @@ namespace EDUZilla.Controllers
         public IActionResult Tests()
         {
             return View();
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult RemindPassword()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> RemindPassword(ChangeEmailViewModel model)
+        {
+            var callbackUrl = Url.Page(
+                "/Views/Home/SetNewPassword",
+                pageHandler: null,
+                values: new { area = "Identity", model = model },
+                protocol: Request.Scheme);
+
+            await _emailSender.SendEmailAsync(
+                model.NewEmail,
+                "Reset password",
+                $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+            return RedirectToAction("Index");
+        }
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult SetNewPassword(ChangeEmailViewModel model)
+        {
+            return View(model);
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> SetNewPassword(ChangeEmailViewModel model, ChangePasswordViewModel newPassword)
+        {
+            var user = await _userManager.FindByEmailAsync(model.NewEmail);
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            if (user == null || token == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var changePasswordResult = await _userManager.ChangePasswordAsync(user, token, newPassword.Password);
+            if (!changePasswordResult.Succeeded)
+            {
+                foreach (var error in changePasswordResult.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

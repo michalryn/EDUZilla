@@ -16,21 +16,21 @@
                         @classModel.Count
                         <i class="fa-solid fa-people-group"></i>
                     </div>
-                    <a asp-action="EditTutor" asp-route-id="@classModel.Id" class="btn btn-primary rounded mx-1">Wychowawca</a>
-                    <a asp-action="EditClass" asp-route-id="@classModel.Id" class="btn btn-primary rounded ms-1">Uczniowie</a>
+                    <a asp-action="EditTutor" asp-route-id="@classModel.Id" class="btn btn-primary rounded mx-1">@languageResource["TutorName"]</a>
+                    <a asp-action="EditClass" asp-route-id="@classModel.Id" class="btn btn-primary rounded ms-1">@languageResource["Students"]</a>
                 </div>
             </li>
         }
     }
     else
     {
-        <li class="list-group-item">Brak klas w systemie</li>
+        <li class="list-group-item">@languageResource["NoClassesInSystem"]</li>
     }
 </ul>
 <form method="post" asp-controller="Class" asp-action="AddClass">
     <div class="mb-3">
         <label class="form-label"></label>
-        <input name="name" type="text" placeholder="Nazwa klasy" class="form-control" />
+        <input name="name" type="text" placeholder="@languageResource["ClassName"]" class="form-control" />
     </div>
     <button type="submit" class="btn btn-primary">@languageResource["CreateClass"]</button>
 </form>

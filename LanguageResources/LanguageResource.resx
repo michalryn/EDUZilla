@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddParent" xml:space="preserve">
+    <value>Dodaj rodzica</value>
+  </data>
   <data name="Calendar" xml:space="preserve">
     <value>Terminarz</value>
   </data>
@@ -146,6 +149,9 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Hasło</value>
+  </data>
+  <data name="StudentId" xml:space="preserve">
+    <value>Id studenta</value>
   </data>
   <data name="Subject" xml:space="preserve">
     <value>Przedmiot</value>

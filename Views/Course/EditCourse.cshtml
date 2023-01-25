@@ -6,26 +6,26 @@
     ViewData["Title"] = "Edytuj przedmiot";
 }
 <form>
-    <label class="form-label">Nazwa:</label>
+    <label class="form-label">@languageResource["Name"]:</label>
     <div class="mb-3 input-group">
-        <input class="form-control" type="text" value="@Model.Name" placeholder="Nazwa przedmiotu" />
-        <button class="btn btn-success">Zapisz</button>
+        <input class="form-control" type="text" value="@Model.Name" placeholder=@languageResource["SubjectName"] />
+        <button class="btn btn-success">@languageResource["Save"]</button>
     </div>
 </form>
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labeledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Czy chcesz usunąć przedmiot?</h5>
+                <h5 class="modal-title">@languageResource["DeleteSubject"]?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Tej akcji nie będzie można cofnąć!</p>
+                <p>@languageResource["UndoAction"]!</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@languageResource["Cancel"]</button>
                 <form method="post" asp-action="DeleteCourse" asp-route-id="@Model.Id">
-                    <button type="submit" class="btn btn-danger">Usuń</button>
+                    <button type="submit" class="btn btn-danger">@languageResource["Delete"]</button>
                 </form>
             </div>
         </div>
@@ -120,5 +120,5 @@
     </div>
 </form>
 
-<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Usuń</button>
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">@languageResource["Delete"]</button>
 
