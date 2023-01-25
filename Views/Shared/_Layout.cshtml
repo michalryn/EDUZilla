@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="~/EDUZilla.styles.css" asp-append-version="true" />
     <script src="https://kit.fontawesome.com/a26751704a.js" crossorigin="anonymous"></script>
 </head>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-1 mb-0">
@@ -16,30 +18,40 @@
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">
-                                EDUZilla
-                                <span class="visually-hidden">(current)</span>
-                            </a>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <a class="nav-link active" asp-controller="Home" asp-action="Notice">
+                                    EDUZilla
+                                    <span class="visually-hidden">(current)</span>
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="nav-link active" asp-controller="Home" asp-action="ReturnToHomePage">
+                                    EDUZilla
+                                    <span class="visually-hidden">(current)</span>
+                                </a>
+                            }
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">About</a>
                         </li>
                     </ul>
-                    <partial name="_LoginPartial" />               
-                        <div class="dropdown">                         
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">  
-                                <i class="fa-solid fa-globe"></i>
-                                @languageResource["Language"]                                                                    
-                            </button>                        
-                            <ul class="dropdown-menu dropdown-menu-end btn-primary">                             
-                                <li class="nav-item">                           
-                                    <a class="dropdown-item text-light" asp-controller="Language" asp-action="Change" asp-route-culture="pl-PL" asp-route-returnUrl="@Url.Action()">polski</a>                       
-                                </li>                       
-                                <li class="nav-item">                          
-                                    <a class="dropdown-item text-light" asp-controller="Language" asp-action="Change" asp-route-culture="en-Us" asp-route-returnUrl="@Url.Action()">english</a>                       
-                                </li>          
-                            </ul>                   
-                        </div>                
+                    <partial name="_LoginPartial" />
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-globe"></i>
+                            @languageResource["Language"]
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end btn-primary">
+                            <li class="nav-item">
+                                <a class="dropdown-item text-light" asp-controller="Language" asp-action="Change" asp-route-culture="pl-PL" asp-route-returnUrl="@Url.Action()">polski</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item text-light" asp-controller="Language" asp-action="Change" asp-route-culture="en-Us" asp-route-returnUrl="@Url.Action()">english</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>
