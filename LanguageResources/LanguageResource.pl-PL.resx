@@ -147,6 +147,9 @@
   <data name="Cancel" xml:space="preserve">
     <value>Anuluj</value>
   </data>
+  <data name="ChangeEmail" xml:space="preserve">
+    <value>Zmień email</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Zmień hasło</value>
   </data>
@@ -228,6 +231,9 @@
   <data name="LastNameError" xml:space="preserve">
     <value>Podaj nazwisko użytkownia!</value>
   </data>
+  <data name="LinkToChange" xml:space="preserve">
+    <value>Wyślij linka na emaila aby zmienić hasło</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>Zaloguj</value>
   </data>
@@ -240,6 +246,9 @@
   <data name="ManageAccount" xml:space="preserve">
     <value>Zarządzaj kontem</value>
   </data>
+  <data name="ManageEmail" xml:space="preserve">
+    <value>Zarządzaj emailem</value>
+  </data>
   <data name="ManageYourAccount" xml:space="preserve">
     <value>Zarządzaj swoim kontem</value>
   </data>
@@ -251,6 +260,9 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>Nazwa</value>
+  </data>
+  <data name="NewEmail" xml:space="preserve">
+    <value>Nowy email</value>
   </data>
   <data name="NewPassword" xml:space="preserve">
     <value>Nowe hasło</value>
@@ -272,6 +284,9 @@
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Profil</value>
+  </data>
+  <data name="ProvideEmail" xml:space="preserve">
+    <value>Podaj adres email</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Pamiętaj mnie</value>
@@ -323,6 +338,9 @@
   </data>
   <data name="UpdatePassword" xml:space="preserve">
     <value>Zaaktualizuj hasło</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Nazwa użytkownika</value>
   </data>
   <data name="ViewClasses" xml:space="preserve">
     <value>Wyświetl klasy</value>

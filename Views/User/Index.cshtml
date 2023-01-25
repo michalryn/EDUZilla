@@ -1,17 +1,25 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject UserManager<ApplicationUser> UserManager
+
 @{
     ViewData["Title"] = "Profile";
 }
-
 <h3>@languageResource["Profile"]</h3>
 
 <div class="row">
     <div class="col-md-6">
-        <form id="profile-form" method="post" novalidate="novalidate">            
-            <div class="form-floating">
-                <input class="form-control" disabled="" type="text" id="Username" name="Username" value="@User.Identity?.Name">
-                <label class="form-label" for="Username">Username</label>
+        <form id="profile-form" method="post" novalidate="novalidate">
+            <div class="form-floating py-1">
+                <input class="form-control" disabled="" type="text" value="@UserManager.GetUserAsync(User).Result.FirstName">
+                <label class="form-label" for="Username">@languageResource["Firstname"]</label>
+            </div>
+            <div class="form-floating py-1">
+                <input class="form-control" disabled="" type="text" value="@UserManager.GetUserAsync(User).Result.LastName">
+                <label class="form-label" for="Username">@languageResource["Lastname"]</label>
+            </div>
+            <div class="form-floating py-1">
+                <input class="form-control" disabled="" type="text" value="@User.Identity?.Name">
+                <label class="form-label" for="Username">Email</label>
             </div>
         </form>
     </div>

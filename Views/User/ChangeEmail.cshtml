@@ -6,7 +6,7 @@
     ViewData["Title"] = "Manage Email";
 }
 
-<h3>Manage Email</h3>
+<h3>@languageResource["ManageEmail"]</h3>
 
 <div class="row">
     <div class="col-md-6">
@@ -24,12 +24,12 @@
 
             <div class="form-floating py-1">
                 <input asp-for="NewEmail" class="form-control" aria-required="true" type="email">
-                <label asp-for="NewEmail" class="form-label">New email</label>
+                <label asp-for="NewEmail" class="form-label">@languageResource["NewEmail"]</label>
                 <span asp-validation-for="NewEmail" class="text-danger field-validation-valid"></span>
             </div>
             
             <div class="py-1">
-                <button id="change-email-button" type="submit" class="w-100 btn btn-lg btn-primary">Change email</button>
+                <button id="change-email-button" type="submit" class="w-100 btn btn-lg btn-primary">@languageResource["ChangeEmail"]</button>
             </div>
             
         </form>
