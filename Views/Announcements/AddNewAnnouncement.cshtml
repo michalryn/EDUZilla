@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@{
     ViewData["Title"] = "Add new announcement";
 }
 
@@ -8,10 +10,10 @@
             <div class="d-flex py-1">
                 <div class="form-floating w-75">
                     <input class="form-control" aria-required="true">
-                    <label class="form-label">Topic</label>
+                    <label class="form-label">@languageResource["Topic"]</label>
                 </div>
                 <div class="form-floating ms-auto w-auto">
-                    <select class="form-select" name="class"></select>
+                    <select class="form-select w-auto" name="class"></select>
                 </div>
 
             </div>
@@ -19,23 +21,22 @@
         <div class="card-body color-body">
             <div class="form-floating pb-4 py-1 ">
                 <textarea class="form-control" aria-required="true"></textarea>
-                <label class="form-label">Content</label>
+                <label class="form-label">@languageResource["Content"]</label>
             </div>
             <div class="d-flex">
-                <!--
-                <div class="form-floating">
-                    <input class="form-control" aria-required="true">
-                    <label class="form-label">Sender</label>
 
+                <div class="form-floating">
+                    <input class="form-control" disabled="" aria-required="true">
+                    <label class="form-label w-auto">@UserManager.GetUserAsync(User).Result.Email</label>
                 </div>
                 <div class="form-floating align-self-center px-4">
                     <p class="align-self-center">-</p>
                 </div>
                 <div class="form-floating">
-                    <input class="form-control" aria-required="true">
-                    <label class="form-label">Date</label>
+                    <input class="form-control" disabled="" aria-required="true">
+                    <label class="form-label w-auto">@DateTime.Now</label>
                 </div>
-                -->
+
                 <div class="form-floating ms-auto align-self-center">
                     <a class="btn btn-primary">@languageResource["AddAnnouncement"] <i class="fa-regular fa-square-plus"></i></a>
                 </div>

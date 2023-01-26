@@ -2,7 +2,7 @@
 
 namespace EDUZilla.Models
 {
-    public class Announcements
+    public class Announcement
     {
         [Key]
         public int Id { get; set; }
