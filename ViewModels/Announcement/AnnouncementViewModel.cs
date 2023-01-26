@@ -6,7 +6,7 @@ namespace EDUZilla.ViewModels.Announcement
 {
     public class AnnouncementViewModel
     {
-        public int AnnouncementId { get; set; }
+        public int? AnnouncementId { get; set; }
         [Required]
         [Display(Name = "Topic")]
         public string Topic { get; set; }
@@ -14,7 +14,7 @@ namespace EDUZilla.ViewModels.Announcement
         [Display(Name = "Content")]
         public string Content { get; set; }
         public DateTime Created { get; set; }
-        public TeacherListViewModel Sender { get; set; }
+        public string Sender { get; set; }
 
         public SelectListItem? Class { get; set; }
 
