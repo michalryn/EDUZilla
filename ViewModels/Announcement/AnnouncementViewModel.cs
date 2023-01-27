@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using EDUZilla.ViewModels.Teacher;
 using System.ComponentModel.DataAnnotations;
+using EDUZilla.ViewModels.Class;
 
 namespace EDUZilla.ViewModels.Announcement
 {
@@ -14,9 +15,8 @@ namespace EDUZilla.ViewModels.Announcement
         [Display(Name = "Content")]
         public string Content { get; set; }
         public DateTime Created { get; set; }
-        public string Sender { get; set; }
-
-        public SelectListItem? Class { get; set; }
+        public string? SenderId { get; set; }
+        public int? ChosenClassId { get; set; }
 
 
     }

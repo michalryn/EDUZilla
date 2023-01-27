@@ -10,7 +10,7 @@ namespace EDUZilla.Models
         public string Topic { get; set; }   
         public string Content { get; set; }
         public DateTime CreatedDate { get; set; }
-        public string SenderEmail { get; set; }
+        public Teacher? Sender { get; set; }
         public Class? Receiver { get; set; }
 
 
