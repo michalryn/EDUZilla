@@ -17,6 +17,8 @@ namespace EDUZilla.ViewModels.Announcement
         public DateTime Created { get; set; }
         public string? SenderId { get; set; }
         public int? ChosenClassId { get; set; }
+        public ClassListViewModel? ChosenClass { get; set; }
+
 
 
     }

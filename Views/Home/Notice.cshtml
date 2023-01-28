@@ -1,4 +1,6 @@
-﻿@using EDUZilla.ViewModels.Announcement
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@using EDUZilla.ViewModels.Announcement
 
 @{
     ViewData["Title"] = @languageResource["Announcements"];
@@ -26,15 +28,31 @@
     </div>
     @foreach (ShowAnnoucementViewModel announcement in Model)
     {
-        <div class="card mb-4">
-            <div class="card-header color-header">
-                <h2><b>@announcement.Topic</b></h2>
+        @if (announcement.ChosenClassId != null)
+        {
+            <div class="card mb-4">
+                <div class="card-header color-header-red">
+                    <h2><b>@announcement.Topic</b></h2>
+                </div>
+                <div class="card-body color-body">
+                    <h5 class="card-title">@announcement.Content</h5>
+                    <br />
+                    <i class="card-text bottom-100">@announcement.SenderEmail - @announcement.Created</i>
+                </div>
             </div>
-            <div class="card-body color-body">
-                <h5 class="card-title">@announcement.Content</h5>
-                <br />
-                <i class="card-text bottom-100">@announcement.SenderEmail - @announcement.Created</i>
+        }
+        else
+        {
+            <div class="card mb-4">
+                <div class="card-header color-header">
+                    <h2><b>@announcement.Topic</b></h2>
+                </div>
+                <div class="card-body color-body">
+                    <h5 class="card-title">@announcement.Content</h5>
+                    <br />
+                    <i class="card-text bottom-100">@announcement.SenderEmail - @announcement.Created</i>
+                </div>
             </div>
-        </div>
+        }
     }
 </div>

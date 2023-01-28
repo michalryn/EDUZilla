@@ -3,6 +3,7 @@ using EDUZilla.Models;
 using EDUZilla.ViewModels.Announcement;
 using EDUZilla.ViewModels.Class;
 using EDUZilla.ViewModels.Teacher;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,8 +20,16 @@ namespace EDUZilla.Services
             _classRepository = classRepository;
             _teacherRepository = teacherRepository;
         }
+        public async Task<Class?> GetClassesAsync(string id)
+        {
+            var classTutor = await _teacherRepository.GetTeacherById(id).Include("TutorClass").SingleAsync();
+            if (classTutor.TutorClass == null)
+            {
+                return null;
+            }
+            return classTutor.TutorClass;
 
-
+        }
         public async Task<bool> AddAnnouncementAsync(AnnouncementViewModel announcementViewModel)
         {
             try
@@ -64,6 +73,12 @@ namespace EDUZilla.Services
             return true;
 
         }
+
+        internal object GetParents(int? chosenClassId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<ShowAnnoucementViewModel>> GetAnnouncementListAsync()
         {
             var result = await _announcementRepository.GetAll().Include("Sender").Include("Receiver").ToListAsync();
@@ -74,8 +89,8 @@ namespace EDUZilla.Services
             }
             foreach (var item in result)
             {
-               
-                if (item.Receiver == null && item.Sender != null)
+
+                if (item.Receiver == null)
                 {
                     announcementList.Add(new ShowAnnoucementViewModel
                     {
@@ -87,14 +102,16 @@ namespace EDUZilla.Services
 
                     });
                 }
-                if (item.Receiver == null && item.Sender == null)
+                else
                 {
                     announcementList.Add(new ShowAnnoucementViewModel
                     {
                         AnnouncementId = item.Id,
                         Topic = item.Topic,
                         Content = item.Content,
-                        Created = item.CreatedDate
+                        Created = item.CreatedDate,
+                        SenderEmail = item.Sender.Email,
+                        ChosenClassId = item.Receiver.Id
 
                     });
                 }
