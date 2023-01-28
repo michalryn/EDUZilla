@@ -115,7 +115,8 @@ namespace EDUZilla.Controllers
         [HttpPost]
         public async Task<IActionResult> RemindPassword(ChangeEmailViewModel model)
         {
-            var user = await _userManager.FindByEmailAsync(model.NewEmail);
+            var email = model.NewEmail.ToUpper();
+            var user = await _userManager.FindByEmailAsync(email);
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
             await _emailSender.SendEmailAsync(
                 model.NewEmail,
@@ -136,7 +137,8 @@ namespace EDUZilla.Controllers
         [HttpPost]
         public async Task<IActionResult> SetNewPassword(ChangePasswordViewModel newPassword)
         {
-            var user = await _userManager.FindByEmailAsync(newPassword.Email);
+            var email = newPassword.Email.ToUpper();
+            var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
             {
                 return RedirectToAction("Index");
