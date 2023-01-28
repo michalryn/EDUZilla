@@ -117,7 +117,8 @@ namespace EDUZilla.Controllers
         {
             var email = model.NewEmail.ToUpper();
             var user = await _userManager.FindByEmailAsync(email);
-            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);            
+
             await _emailSender.SendEmailAsync(
                 model.NewEmail,
                 "Change password",
