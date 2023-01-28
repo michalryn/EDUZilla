@@ -115,36 +115,33 @@ namespace EDUZilla.Controllers
         [HttpPost]
         public async Task<IActionResult> RemindPassword(ChangeEmailViewModel model)
         {
-            var callbackUrl = Url.Page(
-                "/Views/Home/SetNewPassword",
-                pageHandler: null,
-                values: new { area = "Identity", model = model },
-                protocol: Request.Scheme);
-
+            var user = await _userManager.FindByEmailAsync(model.NewEmail);
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
             await _emailSender.SendEmailAsync(
                 model.NewEmail,
-                "Reset password",
-                $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                "Change password",
+                $"Please change your password by <a href='{"https://localhost:7048/Home/SetNewPassword"}'>clicking here</a>. " +
+                $"Also input this token: " + token + " in token field.");
+
 
             return RedirectToAction("Index");
         }
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult SetNewPassword(ChangeEmailViewModel model)
+        public IActionResult SetNewPassword()
         {
-            return View(model);
+            return View();
         }
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> SetNewPassword(ChangeEmailViewModel model, ChangePasswordViewModel newPassword)
+        public async Task<IActionResult> SetNewPassword(ChangePasswordViewModel newPassword)
         {
-            var user = await _userManager.FindByEmailAsync(model.NewEmail);
-            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            if (user == null || token == null)
+            var user = await _userManager.FindByEmailAsync(newPassword.Email);
+            if (user == null)
             {
                 return RedirectToAction("Index");
             }
-            var changePasswordResult = await _userManager.ChangePasswordAsync(user, token, newPassword.Password);
+            var changePasswordResult = await _userManager.ChangePasswordAsync(user, newPassword.Token, newPassword.Password);
             if (!changePasswordResult.Succeeded)
             {
                 foreach (var error in changePasswordResult.Errors)
