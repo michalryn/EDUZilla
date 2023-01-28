@@ -11,11 +11,11 @@
         <form id="profile-form" method="post" novalidate="novalidate">
             <div class="form-floating py-1">
                 <input class="form-control" disabled="" type="text" value="@UserManager.GetUserAsync(User).Result.FirstName">
-                <label class="form-label" for="Username">@languageResource["Firstname"]</label>
+                <label class="form-label" for="Username">@languageResource["FirstName"]</label>
             </div>
             <div class="form-floating py-1">
                 <input class="form-control" disabled="" type="text" value="@UserManager.GetUserAsync(User).Result.LastName">
-                <label class="form-label" for="Username">@languageResource["Lastname"]</label>
+                <label class="form-label" for="Username">@languageResource["LastName"]</label>
             </div>
             <div class="form-floating py-1">
                 <input class="form-control" disabled="" type="text" value="@User.Identity?.Name">

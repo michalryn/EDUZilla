@@ -1,5 +1,7 @@
 ﻿using EDUZilla.Data;
 using EDUZilla.Models;
+using EDUZilla.Services;
+using EDUZilla.ViewModels.Announcement;
 using EDUZilla.ViewModels.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -18,12 +20,15 @@ namespace EDUZilla.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly UserManager<ApplicationUser> _userManager;
-        public HomeController(ILogger<HomeController> logger, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender, UserManager<ApplicationUser> userManager)
+        private readonly AnnouncementService _announcementService;
+
+        public HomeController(ILogger<HomeController> logger, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender, UserManager<ApplicationUser> userManager, AnnouncementService announcementService)
         {
             _logger = logger;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _userManager = userManager;
+            _announcementService = announcementService;
         }
 
         [HttpGet]
@@ -66,9 +71,11 @@ namespace EDUZilla.Controllers
         {
             return View();
         }
-        public IActionResult Notice()
+        [HttpGet]
+        public async Task<IActionResult> Notice()
         {
-            return View();
+            List<ShowAnnoucementViewModel> list = await _announcementService.GetAnnouncementListAsync();
+            return View(list);
         }
         public IActionResult Schedule()
         {
@@ -134,6 +141,10 @@ namespace EDUZilla.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public IActionResult ReturnToHomePage()
+        {
+            return RedirectToAction("/Views/Shared/Index");
         }
     }
 }
