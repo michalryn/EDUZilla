@@ -11,8 +11,7 @@ using System.Collections.Generic;
 
 namespace EDUZilla.Controllers
 {
-    //[Authorize(Roles = "Admin")]
-    [AllowAnonymous]
+    [Authorize(Roles = "Admin")]
     public class AdministratorController : Controller
     {
         #region Properties

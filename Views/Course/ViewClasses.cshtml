@@ -1,0 +1,30 @@
+﻿@using EDUZilla.ViewModels.Class
+@{
+    ViewData["Title"] = "Lista klas";
+}
+
+<h1>Lista klas</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Klasy zapisane na przedmiot</th>
+            <th scope="col">Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(ClassListViewModel group in Model.classes)
+        {
+            var routeValues = new Dictionary<string, string>
+            {
+              {"courseId", "" + Model.courseId},
+              {"classId", "" + group.Id}
+            };
+
+            <tr>
+                <td><a>@group.Name</a></td>
+                <td><a asp-action="ClassesGrades" asp-controller="Grade" asp-all-route-data="routeValues">Oceny</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

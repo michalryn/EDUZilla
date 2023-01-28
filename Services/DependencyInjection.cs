@@ -21,9 +21,13 @@ namespace EDUZilla.Services
             services.AddScoped<ClassService>();
 
             services.AddScoped<TeacherRepository>();
+            services.AddScoped<TeacherService>();
 
             services.AddScoped<CourseRepository>();
             services.AddScoped<CourseService>();
+
+            services.AddScoped<GradeRepository>();
+            services.AddScoped<GradeService>();
 
             services.AddControllersWithViews(options =>
             {
