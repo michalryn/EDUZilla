@@ -22,7 +22,7 @@ namespace EDUZilla.Controllers
         [HttpGet]
         public async Task<IActionResult> AddNewAnnouncement()
         {
-            
+
 
             return View();
         }
