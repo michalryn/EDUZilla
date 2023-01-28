@@ -1,4 +1,6 @@
-﻿@using EDUZilla.ViewModels.Announcement
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@using EDUZilla.ViewModels.Announcement
 
 @{
     ViewData["Title"] = @languageResource["Announcements"];

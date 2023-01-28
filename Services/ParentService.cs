@@ -9,14 +9,18 @@ namespace EDUZilla.Services
         #region Properties
 
         private readonly ParentRepository _parentRepository;
+        private readonly ClassRepository _classRepository;
+        private readonly StudentRepository _studentRepository;
 
         #endregion
 
         #region Constructors
 
-        public ParentService(ParentRepository parentRepository)
+        public ParentService(ParentRepository parentRepository, ClassRepository classRepository, StudentRepository studentRepository)
         {
             _parentRepository = parentRepository;
+            _classRepository = classRepository;
+            _studentRepository = studentRepository;
         }
 
         #endregion
@@ -61,6 +65,27 @@ namespace EDUZilla.Services
             };
 
             return parentListViewModel;
+        }
+        public async Task<List<ParentListViewModel?>?> GetParents(int classId)
+        {
+            var chosenClass = await _classRepository.GetClassById(classId).Include("Students").SingleAsync();
+            List<ParentListViewModel?> parentsMail = new List<ParentListViewModel?>();
+            if (chosenClass.Students == null)
+            {
+                return null;
+            }
+            foreach (var student in chosenClass.Students)
+            {
+
+                if (student.ParentId != null)
+                {
+                    ParentListViewModel parent = await GetParentByIdAsync(student.ParentId);
+                    parentsMail.Add(parent);
+                }
+
+            }
+            return parentsMail;
+
         }
 
         #endregion
