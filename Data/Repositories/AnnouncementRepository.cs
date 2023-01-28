@@ -11,10 +11,6 @@ namespace EDUZilla.Data.Repositories
         {
             return GetAll();
         }
-        public async Task UpdateAnnouncementAsync(Announcement announcement)
-        {
-            await UpdateAndSaveChangesAsync(announcement);
-        }
         
     }
 }

@@ -24,17 +24,26 @@ namespace EDUZilla.Services
         {
             try
             {
-                if (announcementViewModel.ChosenClassId == null)
-                {
-                    return false;
-                }
-                Class group = await _classRepository.GetClassById((int)announcementViewModel.ChosenClassId).SingleAsync();
                 if (announcementViewModel.SenderId == null)
                 {
                     return false;
                 }
                 Teacher teacher = await _teacherRepository.GetTeacherById((string)announcementViewModel.SenderId).SingleAsync();
 
+                if (announcementViewModel.ChosenClassId == null)
+                {
+                    Announcement announcementNoClass = new Announcement()
+                    {
+                        Topic = announcementViewModel.Topic,
+                        Content = announcementViewModel.Content,
+                        CreatedDate = announcementViewModel.Created,
+                        Sender = teacher
+                    };
+                    await _announcementRepository.AddAndSaveChangesAsync(announcementNoClass);
+
+                    return true;
+                }
+                Class group = await _classRepository.GetClassById((int)announcementViewModel.ChosenClassId).SingleAsync();
                 Announcement announcement = new Announcement()
                 {
                     Topic = announcementViewModel.Topic,
@@ -54,25 +63,41 @@ namespace EDUZilla.Services
             return true;
 
         }
-        public async Task<List<AnnouncementListForm>> GetCoursesListAsync()
+        public async Task<List<ShowAnnoucementViewModel>> GetAnnouncementListAsync()
         {
-            var result = await _announcementRepository.GetAll().ToListAsync();
-            List<AnnouncementListForm> announcementList = new List<AnnouncementListForm>();
-            if(!result.Any())
+            var result = await _announcementRepository.GetAll().Include("Sender").Include("Receiver").ToListAsync();
+            List<ShowAnnoucementViewModel> announcementList = new List<ShowAnnoucementViewModel>();
+            if (!result.Any())
             {
                 return announcementList;
             }
-            foreach(var item in result)
+            foreach (var item in result)
             {
-                announcementList.Add(new AnnouncementListForm
+               
+                if (item.Receiver == null && item.Sender != null)
                 {
-                    AnnouncementId = item.Id,
-                    Topic = item.Topic,
-                    Content = item.Content,
-                    Created = item.CreatedDate,
+                    announcementList.Add(new ShowAnnoucementViewModel
+                    {
+                        AnnouncementId = item.Id,
+                        Topic = item.Topic,
+                        Content = item.Content,
+                        Created = item.CreatedDate,
+                        SenderEmail = item.Sender.Email
 
+                    });
+                }
+                if (item.Receiver == null && item.Sender == null)
+                {
+                    announcementList.Add(new ShowAnnoucementViewModel
+                    {
+                        AnnouncementId = item.Id,
+                        Topic = item.Topic,
+                        Content = item.Content,
+                        Created = item.CreatedDate
 
-                });
+                    });
+                }
+
             }
             return announcementList;
 
