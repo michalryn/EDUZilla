@@ -79,22 +79,18 @@ namespace EDUZilla.Controllers
             {
                 return View();
             }
-            var callbackUrl = Url.Page(
-                "/Views/User/ChangePassword",
-                pageHandler: null,
-                values: new { area = "Identity" },
-                protocol: Request.Scheme);
 
             await _emailSender.SendEmailAsync(
                 user.Email,
                 "Change password",
-                $"Please change your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                $"Please change your password by <a href='{"https://localhost:7048/User/ChangePassword"}'>clicking here</a>.");
 
 
             return View();
         }
         [HttpGet]
         public IActionResult ChangeEmail()
+
         {
             return View();
         }

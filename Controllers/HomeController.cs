@@ -21,14 +21,16 @@ namespace EDUZilla.Controllers
         private readonly IEmailSender _emailSender;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly AnnouncementService _announcementService;
+        private readonly ParentService _parentService;
 
-        public HomeController(ILogger<HomeController> logger, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender, UserManager<ApplicationUser> userManager, AnnouncementService announcementService)
+        public HomeController(ILogger<HomeController> logger, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender, UserManager<ApplicationUser> userManager, AnnouncementService announcementService, ParentService parentService)
         {
             _logger = logger;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _userManager = userManager;
             _announcementService = announcementService;
+            _parentService = parentService;
         }
 
         [HttpGet]
@@ -75,7 +77,24 @@ namespace EDUZilla.Controllers
         public async Task<IActionResult> Notice()
         {
             List<ShowAnnoucementViewModel> list = await _announcementService.GetAnnouncementListAsync();
-            return View(list);
+            List<ShowAnnoucementViewModel> listFiltered = new List<ShowAnnoucementViewModel>();
+            var user = await _userManager.GetUserAsync(User);
+            foreach (var notice in list)
+            {
+                if(notice.ChosenClassId != null)
+                {
+                    var result = await _parentService.CheckIfParentOrStudent((int)notice.ChosenClassId, user.Id);
+                    if(result == true)
+                    {
+                        listFiltered.Add(notice);
+                    }
+                }
+                else
+                {
+                    listFiltered.Add(notice);
+                }
+            }
+            return View(listFiltered);
         }
         public IActionResult Schedule()
         {

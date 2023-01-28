@@ -66,6 +66,27 @@ namespace EDUZilla.Services
 
             return parentListViewModel;
         }
+        public async Task<bool> CheckIfParentOrStudent(int classId, string userId)
+        {
+            var chosenClass = await _classRepository.GetClassById(classId).Include("Students").SingleAsync();
+            if (chosenClass.Students == null)
+            {
+                return false;
+            }
+            foreach (var student in chosenClass.Students)
+            {
+                if(student.Id == userId)
+                {
+                    return true;
+                }
+                if (student.ParentId == userId)
+                {
+                    return true;
+                }
+
+            }
+            return false;
+        }
         public async Task<List<ParentListViewModel?>?> GetParents(int classId)
         {
             var chosenClass = await _classRepository.GetClassById(classId).Include("Students").SingleAsync();
