@@ -8,7 +8,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Klasy zapisane na przedmiot</th>
+            <th scope="col">Klasy zapisane na przedmiot @Model.courseName</th>
             <th scope="col">Akcje</th>
         </tr>
     </thead>
@@ -28,3 +28,4 @@
         }
     </tbody>
 </table>
+<a class="btn btn-secondary" asp-action="Index" asp-controller="Teacher">@languageResource["Back"]</a>

@@ -17,7 +17,7 @@ namespace EDUZilla.Data
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Class> Classes { get; set; }
         public DbSet<Course> Courses { get; set; }
-        public DbSet<Grade> Grade { get; set; }
+        public DbSet<Grade> Grades { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
         
         protected override void OnModelCreating(ModelBuilder builder)

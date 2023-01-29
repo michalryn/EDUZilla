@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Szczegóły oceny";
+}
+
+<h1>Szczegóły oceny</h1>
+<p><b>Przedmiot:</b> @Model.Grade.CourseName</p>
+<p><b>Ocena:</b> @Model.Grade.Value</p>
+<p><b>Opis:</b> @Model.Grade.Description</p>
+<p><b>Wystawiona:</b> @Model.Grade.CreatedDate</p>
+@if (User.IsInRole("Teacher"))
+{
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">@languageResource["Delete"]</button>
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labeledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Usunąć ocenę?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>@languageResource["UndoAction"]!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@languageResource["Cancel"]</button>
+                    <form method="post" asp-action="DeleteGrade">
+                        <input type="hidden" name="id" value="@Model.Grade.Id" />
+                        <input type="hidden" name="courseId" value="@Model.CourseId" />
+                        <input type="hidden" name="classId" value="@Model.ClassId" />
+                        <button type="submit" class="btn btn-danger">@languageResource["Delete"]</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -28,10 +28,10 @@ namespace EDUZilla.Controllers
 
         [Authorize(Roles = "Teacher")]
         [HttpGet]
-        public async Task<IActionResult> AddGrade(string studentId, int courseId, int classId)
+        public IActionResult AddGrade(string studentId, int courseId, int classId)
         {
 
-            return View(new { studentId = studentId, courseId = courseId, classId = classId});
+            return View(new { studentId = studentId, courseId = courseId, classId = classId });
         }
 
         [Authorize(Roles = "Teacher")]
@@ -48,6 +48,32 @@ namespace EDUZilla.Controllers
             }
 
             return RedirectToAction("ClassesGrades", new { courseId = form.CourseId, classId = form.ClassId });
+        }
+
+        public async Task<IActionResult> GradeDetails(int id, int courseId, int classId)
+        {
+            GradeViewModel viewModel = await _gradeService.GetGradeDetailsAsync(id);
+
+            if (viewModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(new { Grade = viewModel, CourseId = courseId, ClassId = classId });
+        }
+
+        [Authorize(Roles = "Teacher")]
+        [HttpPost]
+        public async Task<IActionResult> DeleteGrade(int id, int courseId, int classId)
+        {
+            var result = await _gradeService.DeleteGradeAsync(id);
+
+            if(!result)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction("ClassesGrades", new { courseId = courseId, classId = classId });
         }
     }
 }

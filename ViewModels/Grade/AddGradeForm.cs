@@ -7,5 +7,6 @@
         public int ClassId { get; set; }
         public int GradeValue { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string Description { get; set; }
     }
 }
