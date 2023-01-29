@@ -27,6 +27,13 @@ namespace EDUZilla.Data.Repositories
             return result;
         }
 
+        public IQueryable<Student> GetStudentById(string id)
+        {
+            var result = DataContext.Students.Where(s => s.Id == id);
+
+            return result;
+        }
+
         public async Task UpdateStudentAsync(Student student)
         {
             await UpdateAndSaveChangesAsync(student);

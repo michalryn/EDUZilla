@@ -1,0 +1,25 @@
+﻿@using EDUZilla.ViewModels.Course
+@{
+    ViewData["Title"] = "Panel nauczyciela";
+}
+
+<h1>Panel nauczyciela</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Moje przedmioty</th>
+            <th scope="col">Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(CourseListViewModel course in Model)
+        {
+            <tr>
+                <td><a asp-action="Index" asp-controller ="Course" asp-route-id="@course.Id">@course.Name</a></td>
+                <td><a class="btn btn-primary" asp-action="ViewClasses" asp-controller="Course" asp-route-id="@course.Id">Klasy</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+

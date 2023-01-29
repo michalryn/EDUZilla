@@ -114,7 +114,9 @@ namespace EDUZilla.Services
         {
             try
             {
-                await _courseRepository.RemoveByIdAndSaveChangesAsync(id);
+                var course = await _courseRepository.GetCourseById(id).Include("Grades").SingleAsync();
+                _courseRepository.Remove(course);
+                await _courseRepository.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -256,6 +258,41 @@ namespace EDUZilla.Services
             }
 
             return true;
+        }
+
+        public async Task<List<ClassListViewModel>> GetClassListViewModelAsync(int courseId)
+        {
+            var course = await _courseRepository.GetCourseById(courseId).Include("Classes").SingleAsync();
+
+            if(course == null)
+            {
+                return new List<ClassListViewModel>();
+            }
+
+            if (course.Classes == null)
+            {
+                return new List<ClassListViewModel>();
+            }
+
+            List<ClassListViewModel> classes = new List<ClassListViewModel>();
+
+            foreach (var group in course.Classes)
+            {
+                classes.Add(new ClassListViewModel()
+                {
+                    Id = group.Id,
+                    Name = group.Name
+                });
+            }
+
+            return classes;
+        }
+
+        public async Task<Course> GetCourseViewModelAsync(int courseId)
+        {
+            var course = await _courseRepository.GetCourseById(courseId).SingleAsync();
+
+            return course;
         }
         #endregion
     }

@@ -16,9 +16,11 @@ namespace EDUZilla.Controllers
             _courseService = courseService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int id)
         {
-            return View();
+            var course = await _courseService.GetCourseViewModelAsync(id);
+
+            return View(course);
         }
 
         [Authorize(Roles = "Admin")]
@@ -153,6 +155,15 @@ namespace EDUZilla.Controllers
             List<CourseListViewModel> list = await _courseService.GetCoursesListAsync();
 
             return View(list);
+        }
+        
+        [Authorize(Roles = "Teacher")]
+        [HttpGet]
+        public async Task<IActionResult> ViewClasses(int id)
+        {
+            var classes = await _courseService.GetClassListViewModelAsync(id);
+
+            return View(new { classes = classes, courseId = id });
         }
     }
 }

@@ -14,6 +14,13 @@ namespace EDUZilla.Data.Repositories
             return GetAll();
         }
 
+        public IQueryable<Teacher> GetTeacherByName(string name)
+        {
+            var result = DataContext.Teachers.Where(t => t.UserName == name);
+            
+            return result;
+        }
+
         public IQueryable<Teacher> GetTeacherById(string id)
         {
             var result = DataContext.Teachers.Where(t => t.Id == id);
