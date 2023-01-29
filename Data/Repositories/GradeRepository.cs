@@ -9,6 +9,11 @@ namespace EDUZilla.Data.Repositories
 
         }
 
+        public IQueryable<Grade> GetGradeById(int id)
+        {
+            var result = DataContext.Grades.Where(x => x.Id == id);
 
+            return result;
+        }
     }
 }

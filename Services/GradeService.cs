@@ -72,6 +72,7 @@ namespace EDUZilla.Services
                         {
                             Id = grade.Id,
                             Value = grade.Value,
+                            Description = grade.Description,
                             CreatedDate = grade.CreatedDate
                         });
                     }
@@ -101,7 +102,7 @@ namespace EDUZilla.Services
                 var student = await _studentRepository.GetStudentById(form.StudentId).SingleAsync();
                 var course = await _courseRepository.GetCourseById(form.CourseId).SingleAsync();
 
-                if(student == null || course == null)
+                if (student == null || course == null)
                 {
                     return false;
                 }
@@ -109,6 +110,7 @@ namespace EDUZilla.Services
                 Grade grade = new Grade()
                 {
                     Value = form.GradeValue,
+                    Description = form.Description,
                     CreatedDate = form.CreatedDate,
                     Student = student,
                     Course = course
@@ -117,6 +119,41 @@ namespace EDUZilla.Services
                 await _gradeRepository.AddAndSaveChangesAsync(grade);
             }
             catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<GradeViewModel> GetGradeDetailsAsync(int id)
+        {
+            var grade = await _gradeRepository.GetGradeById(id).Include("Course").SingleAsync();
+
+            if (grade == null)
+            {
+                return null;
+            }
+
+            GradeViewModel viewModel = new GradeViewModel()
+            {
+                Id = id,
+                Value = grade.Value,
+                Description = grade.Description,
+                CreatedDate = grade.CreatedDate,
+                CourseName = grade.Course?.Name
+            };
+
+            return viewModel;
+        }
+
+        public async Task<bool> DeleteGradeAsync(int id)
+        {
+            try
+            {
+                await _gradeRepository.RemoveByIdAndSaveChangesAsync(id);
+            }
+            catch(Exception ex)
             {
                 return false;
             }

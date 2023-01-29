@@ -30,7 +30,13 @@
                     <td scope="auto" class="col-6">
                         @foreach (GradeViewModel grade in student.Grades)
                         {
-                            <span class="badge text-bg-primary">@grade.Value</span>
+                            var gradeValues = new Dictionary<string, string>
+                            {
+                                {"id", "" + @grade.Id},
+                                {"courseId", "" + Model.CourseId},
+                                {"classId", "" + Model.ClassId}
+                            };
+                            <a asp-action="GradeDetails" asp-all-route-data="gradeValues" class="badge text-bg-primary text-decoration-none">@grade.Value</a>
                         }
                     </td>
                     <td scope="col">
@@ -41,3 +47,4 @@
         </tbody>
     </table>
 </div>
+<a class="btn btn-secondary" asp-action="ViewClasses" asp-controller="Course" asp-route-id="@Model.CourseId">@languageResource["Back"]</a>

@@ -162,8 +162,14 @@ namespace EDUZilla.Controllers
         public async Task<IActionResult> ViewClasses(int id)
         {
             var classes = await _courseService.GetClassListViewModelAsync(id);
+            var course = await _courseService.GetCourseViewModelAsync(id);
 
-            return View(new { classes = classes, courseId = id });
+            if(classes == null || course == null)
+            {
+                return NotFound();
+            }
+
+            return View(new { classes = classes, courseId = id, courseName = course.Name });
         }
     }
 }
