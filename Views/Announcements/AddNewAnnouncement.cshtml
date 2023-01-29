@@ -16,7 +16,7 @@
                         <label class="form-label">@languageResource["Topic"]</label>
                     </div>
                     <div class="form-floating ms-auto w-auto">
-                        @if (@Model.ChosenClass != null)
+                        @if (@Model != null)
                         {
                             <input asp-for="ChosenClassId" value="@Model.ChosenClass.Id" class="form-control" aria-required="true">
                             <label class="form-label">Klasa</label>
