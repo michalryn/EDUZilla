@@ -34,7 +34,7 @@ namespace EDUZilla.Services
 
         public async Task<ClassGradeViewModel> GetClassGradeViewModelAsync(int classId, int courseId)
         {
-            var group = _classRepository.GetClassById(classId).Include("Students");
+            var group = _classRepository.GetClassById(classId).Include("Students.Grades");
 
             ClassGradeViewModel viewModel = new ClassGradeViewModel()
             {
@@ -114,7 +114,7 @@ namespace EDUZilla.Services
                     Course = course
                 };
 
-                await _gradeRepository.UpdateAndSaveChangesAsync(grade);
+                await _gradeRepository.AddAndSaveChangesAsync(grade);
             }
             catch (Exception ex)
             {

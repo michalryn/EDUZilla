@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Dodaj ocenę";
+}
+
+<h1>Dodaj ocenę</h1>
+<form method="post">
+    <input type="hidden" name="StudentId" value="@Model.studentId" />
+    <input type="hidden" name="CourseId" value="@Model.courseId" />
+    <input type="hidden" name="ClassId" value="@Model.classId" />
+    <select class="form-select" name="GradeValue">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+    </select>
+    <button class="btn btn-success" type="submit">Dodaj</button>
+</form>

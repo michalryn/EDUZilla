@@ -27,6 +27,14 @@ namespace EDUZilla.Controllers
         }
 
         [Authorize(Roles = "Teacher")]
+        [HttpGet]
+        public async Task<IActionResult> AddGrade(string studentId, int courseId, int classId)
+        {
+
+            return View(new { studentId = studentId, courseId = courseId, classId = classId});
+        }
+
+        [Authorize(Roles = "Teacher")]
         [HttpPost]
         public async Task<IActionResult> AddGrade(AddGradeForm form)
         {
@@ -34,7 +42,7 @@ namespace EDUZilla.Controllers
 
             var result = await _gradeService.AddGradeAsync(form);
 
-            if(!result)
+            if (!result)
             {
                 return BadRequest();
             }

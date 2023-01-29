@@ -114,7 +114,9 @@ namespace EDUZilla.Services
         {
             try
             {
-                await _courseRepository.RemoveByIdAndSaveChangesAsync(id);
+                var course = await _courseRepository.GetCourseById(id).Include("Grades").SingleAsync();
+                _courseRepository.Remove(course);
+                await _courseRepository.SaveChangesAsync();
             }
             catch (Exception ex)
             {
