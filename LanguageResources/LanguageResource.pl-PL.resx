@@ -168,6 +168,9 @@
   <data name="ConfirmNewPassword" xml:space="preserve">
     <value>Potwierdź nowe hasło</value>
   </data>
+  <data name="Content" xml:space="preserve">
+    <value>Zawartość</value>
+  </data>
   <data name="CourseName" xml:space="preserve">
     <value>Nazwa przedmiotu</value>
   </data>
@@ -329,6 +332,9 @@
   </data>
   <data name="Tests" xml:space="preserve">
     <value>Testy</value>
+  </data>
+  <data name="Topic" xml:space="preserve">
+    <value>Temat</value>
   </data>
   <data name="TutorName" xml:space="preserve">
     <value>Wychowawca</value>
