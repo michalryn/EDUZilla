@@ -1,0 +1,32 @@
+﻿@using EDUZilla.ViewModels.Grade
+@using EDUZilla.ViewModels.Student
+@{
+    ViewData["Title"] = "Oceny";
+}
+
+<h1>Oceny</h1>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="auto">Przedmiot</th>
+                <th scope="auto">Oceny</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (CourseGrades course in Model.CourseGrades)
+            {
+                <tr>
+                    <td scope="auto" class="col-3">@course.CourseName</td>
+                    <td scope="auto" class="col-6">
+                        @foreach (GradeViewModel grade in course.Grades)
+                        {
+                            <a asp-action="GradeDetails" asp-controller="Grade" asp-route-id="@grade.Id" class="badge text-bg-primary text-decoration-none">@grade.Value</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

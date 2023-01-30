@@ -1,0 +1,27 @@
+﻿@using EDUZilla.ViewModels.Student
+@{
+    ViewData["Title"] = "Dzieci";
+}
+
+<h1>Lista dzieci</h1>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Dzieci</th>
+                <th scope="col">Akcja</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (StudentListViewModel student in Model)
+            {
+                <tr>
+                    <td scope="col">@student.FirstName @student.LastName</td>
+                    <td scope="col">
+                        <a asp-action="StudentGrades" asp-controller="Student" asp-route-id="@student.StudentId" class="btn btn-primary">Oceny</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

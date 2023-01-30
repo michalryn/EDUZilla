@@ -50,7 +50,7 @@ namespace EDUZilla.Controllers
             return RedirectToAction("ClassesGrades", new { courseId = form.CourseId, classId = form.ClassId });
         }
 
-        public async Task<IActionResult> GradeDetails(int id, int courseId, int classId)
+        public async Task<IActionResult> GradeDetails(int id, int? courseId, int? classId)
         {
             GradeViewModel viewModel = await _gradeService.GetGradeDetailsAsync(id);
 
@@ -74,6 +74,15 @@ namespace EDUZilla.Controllers
             }
 
             return RedirectToAction("ClassesGrades", new { courseId = courseId, classId = classId });
+        }
+
+        public async Task<IActionResult> GetStudentGradesSummary(string id)
+        {
+            DateTime dateTime = DateTime.Now;
+
+            var summary = await _gradeService.GetStudentGradesSummary(id, dateTime.Subtract(new TimeSpan(365, 1, 1, 1)), dateTime);
+
+            return View();
         }
     }
 }

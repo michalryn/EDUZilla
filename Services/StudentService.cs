@@ -84,6 +84,50 @@ namespace EDUZilla.Services
             return true;
         }
 
+        public async Task<string> GetStudentIdAsync(string email)
+        {
+            var student = await _studentRepository.GetStudents().Where(x => x.Email == email).FirstOrDefaultAsync();
+
+            if(student == null)
+            {
+                return null;
+            }
+
+            return student.Id;
+        }
+
+        public async Task<List<StudentListViewModel>> GetChildrenAsync(string email)
+        {
+            var parent = await _parentRepository.GetParents().Where(x => x.Email == email).FirstOrDefaultAsync();
+
+            if (parent == null)
+            {
+                return null;
+            }
+
+            var students = await _studentRepository.GetAll().Where(s => s.ParentId == parent.Id).ToListAsync();
+
+            if(students == null)
+            {
+                return new List<StudentListViewModel>();
+            }
+
+            List<StudentListViewModel> children = new List<StudentListViewModel>();
+
+            foreach(var student in students)
+            {
+                children.Add(new StudentListViewModel()
+                {
+                    StudentId = student.Id,
+                    FirstName = student.FirstName,
+                    LastName = student.LastName,
+                    Email = student.Email
+                });
+            }
+
+            return children;
+        }
+
         #endregion
     }
 }
