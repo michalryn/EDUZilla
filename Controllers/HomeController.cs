@@ -73,6 +73,7 @@ namespace EDUZilla.Controllers
         {
             return View();
         }
+
         [HttpGet]
         public async Task<IActionResult> Notice()
         {

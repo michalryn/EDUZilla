@@ -109,6 +109,18 @@ namespace EDUZilla.Services
 
         }
 
+        public async Task<string> GetParentIdAsync(string email)
+        {
+            var parent = await _parentRepository.GetParents().Where(x => x.Email == email).FirstOrDefaultAsync();
+
+            if (parent == null)
+            {
+                return null;
+            }
+
+            return parent.Id;
+        }
+
         #endregion
 
     }

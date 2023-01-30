@@ -153,12 +153,108 @@ namespace EDUZilla.Services
             {
                 await _gradeRepository.RemoveByIdAndSaveChangesAsync(id);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
 
             return true;
+        }
+
+        public async Task<StudentGradesSummary> GetStudentGradesSummary(string id, DateTime startDate, DateTime endDate)
+        {
+            var student = _studentRepository.GetStudentById(id);
+
+            if (!student.Any())
+            {
+                return null;
+            }
+
+            var grades = await student.Include("Grades.Course").Select(s => s.Grades.Where(g => g.CreatedDate >= startDate && g.CreatedDate <= endDate)).SingleAsync();
+
+            StudentGradesSummary summary = new StudentGradesSummary()
+            {
+                CoursesSummary = new List<CourseGradesSummary>()
+            };
+
+            var courses = grades.Select(g => g.Course.Name).Distinct();
+
+            var courseSum = 0d;
+            foreach(var course in courses)
+            {
+                CourseGradesSummary courseSummary = new CourseGradesSummary()
+                {
+                    CourseName = course,
+                    Grades = new List<int>(),
+                    GradesAverage = 0d,
+                };
+                var gradesSum = 0;
+                foreach (var grade in grades.Where(g => g.Course.Name == course))
+                {
+                    gradesSum += grade.Value;
+                    courseSummary.Grades.Add(grade.Value);
+                }
+
+                courseSummary.GradesAverage = gradesSum / courseSummary.Grades.Count();
+                courseSum += Math.Round(courseSummary.GradesAverage);
+                summary.CoursesSummary.Add(courseSummary);
+            }
+
+            var studentDetails = await student.SingleAsync();
+
+            summary.StudentId = studentDetails.Id;
+            summary.StudentName = studentDetails.FirstName + " " + studentDetails.LastName;
+            summary.OverallAverege = courseSum / (summary.CoursesSummary.Count() == 0 ? 1 : summary.CoursesSummary.Count());
+
+            return summary;
+        }
+
+        public async Task<StudentGradesViewModel> GetStudentGradesAsync(string id)
+        {
+            var student = _studentRepository.GetStudentById(id);
+
+            if (!student.Any())
+            {
+                return null;
+            }
+
+            var grades = await student.Include("Grades.Course").Select(s => s.Grades).SingleAsync();
+
+            StudentGradesViewModel viewModel = new StudentGradesViewModel()
+            {
+                CourseGrades = new List<CourseGrades>()
+            };
+
+            var courses = grades?.Select(g => g.Course.Name).Distinct();
+
+            if (courses == null)
+            {
+                return viewModel;
+            }
+
+            foreach(var course in courses)
+            {
+                CourseGrades courseGrades = new CourseGrades()
+                {
+                    CourseName = course,
+                    Grades = new List<GradeViewModel>()
+                };
+
+                foreach(var grade in grades.Where(g => g.Course?.Name == course))
+                {
+                    courseGrades.Grades.Add(new GradeViewModel()
+                    {
+                        Id = grade.Id,
+                        Value = grade.Value,
+                        Description = grade.Description,
+                        CreatedDate = grade.CreatedDate,
+                        CourseName = grade.Course?.Name
+                    });
+                }
+                viewModel.CourseGrades.Add(courseGrades);
+            }
+
+            return viewModel;
         }
 
         #endregion
