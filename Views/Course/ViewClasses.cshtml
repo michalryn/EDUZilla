@@ -3,13 +3,13 @@
     ViewData["Title"] = "Lista klas";
 }
 
-<h1>Lista klas</h1>
+<h1>@languageResource["ClassList"]</h1>
 
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Klasy zapisane na przedmiot @Model.courseName</th>
-            <th scope="col">Akcje</th>
+            <th scope="col">@languageResource["ClassAssigned"] @Model.courseName</th>
+            <th scope="col">@languageResource["Actions"]</th>
         </tr>
     </thead>
     <tbody>
@@ -23,7 +23,7 @@
 
             <tr>
                 <td><a>@group.Name</a></td>
-                <td><a asp-action="ClassesGrades" asp-controller="Grade" asp-all-route-data="routeValues">Oceny</a></td>
+                <td><a asp-action="ClassesGrades" asp-controller="Grade" asp-all-route-data="routeValues">@languageResource["Marks"]</a></td>
             </tr>
         }
     </tbody>

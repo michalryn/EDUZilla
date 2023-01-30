@@ -6,17 +6,17 @@
     ViewData["Title"] = "Dodaj rodzica";
 }
 
-<h1>Dodaj rodzica</h1>
+<h1>@languageResource["AddParent"]</h1>
 <p>@Model.Id</p>
 <p>@Model.Email</p>
 <p>@Model.FirstName</p>
 <p>@Model.LastName</p>
-<p>Rodzic:</p>
+<p>@languageResource["Parent"]:</p>
 <p>@Model.ParentId</p>
 <p>@Model.ParentFirstName</p>
 <p>@Model.ParentLastName</p>
 
-<h3>Rodzice</h3>
+<h3>@languageResource["Parents"]</h3>
 @foreach (ParentListViewModel parent in Model.Parents)
 {
     <p>
@@ -24,7 +24,7 @@
         <form asp-action="AddParent" method="post">
             <input type="hidden" name="studentId" value="@Model.Id" />
             <input type="hidden" name="parentId" value="@parent.Id" />
-            <button type="submit" class="btn btn-primary">Dodaj</button>
+            <button type="submit" class="btn btn-primary">@languageResource["Add"]</button>
         </form>
     </p>
 }

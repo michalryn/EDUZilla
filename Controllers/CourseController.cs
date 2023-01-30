@@ -34,9 +34,11 @@ namespace EDUZilla.Controllers
             {
                 return View();
             }
+            course.AvailableTeachers?.Insert(0, new SelectListItem() { Value = "", Selected = true, Disabled = true });
+            course.AvailableClasses?.Insert(0, new SelectListItem() { Value = "", Selected = true, Disabled = true });
 
-            course.AvailableTeachers?.Insert(0, new SelectListItem() { Value = "", Text = "Wybierz nauczyciela", Selected = true, Disabled = true });
-            course.AvailableClasses?.Insert(0, new SelectListItem() { Value = "", Text = "Wybierz klasę", Selected = true, Disabled = true });
+            //course.AvailableTeachers?.Insert(0, new SelectListItem() { Value = "", Text = "Wybierz nauczyciela", Selected = true, Disabled = true });
+            //course.AvailableClasses?.Insert(0, new SelectListItem() { Value = "", Text = "Wybierz klasę", Selected = true, Disabled = true });
 
             return View(course);
         }

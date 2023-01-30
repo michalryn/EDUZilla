@@ -46,6 +46,8 @@ namespace EDUZilla.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewAnnouncement(AnnouncementViewModel announcementViewModel)
         {
+            announcementViewModel.Created = DateTime.Now;
+            announcementViewModel.SenderId = _userManager.GetUserAsync(User).Result.Id;
             var result = await _announcementService.AddAnnouncementAsync(announcementViewModel);
             if (result == false)
             {

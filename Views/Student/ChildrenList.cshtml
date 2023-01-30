@@ -8,8 +8,8 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Dzieci</th>
-                <th scope="col">Akcja</th>
+                <th scope="col">@languageResource["Children"]</th>
+                <th scope="col">@languageResource["Action"]</th>
             </tr>
         </thead>
         <tbody>
@@ -18,7 +18,7 @@
                 <tr>
                     <td scope="col">@student.FirstName @student.LastName</td>
                     <td scope="col">
-                        <a asp-action="StudentGrades" asp-controller="Student" asp-route-id="@student.StudentId" class="btn btn-primary">Oceny</a>
+                        <a asp-action="StudentGrades" asp-controller="Student" asp-route-id="@student.StudentId" class="btn btn-primary">@languageResource["Marks"]</a>
                     </td>
                 </tr>
             }

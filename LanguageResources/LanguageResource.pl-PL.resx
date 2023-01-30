@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Action" xml:space="preserve">
+    <value>Akcja</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Akcje</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>Dodaj</value>
   </data>
@@ -125,6 +131,12 @@
   </data>
   <data name="AddCourse" xml:space="preserve">
     <value>Dodaj przedmiot</value>
+  </data>
+  <data name="AddGrade" xml:space="preserve">
+    <value>Dodaj ocenę</value>
+  </data>
+  <data name="AddLeadTeacher" xml:space="preserve">
+    <value>Dodaj prowadzącego</value>
   </data>
   <data name="AddParent" xml:space="preserve">
     <value>Dodaj rodzica</value>
@@ -137,6 +149,9 @@
   </data>
   <data name="Announcements" xml:space="preserve">
     <value>Ogłoszenia</value>
+  </data>
+  <data name="AssignSubject" xml:space="preserve">
+    <value>Przypisz przedmiot do klasy</value>
   </data>
   <data name="Back" xml:space="preserve">
     <value>Wróć</value>
@@ -153,14 +168,32 @@
   <data name="ChangePassword" xml:space="preserve">
     <value>Zmień hasło</value>
   </data>
+  <data name="Children" xml:space="preserve">
+    <value>Dzieci</value>
+  </data>
+  <data name="ChooseClass" xml:space="preserve">
+    <value>Wybierz klasę</value>
+  </data>
   <data name="ChooseTeacher" xml:space="preserve">
     <value>Wybierz nauczyciela</value>
   </data>
   <data name="ChooseTutor" xml:space="preserve">
     <value>Wybierz wychowawcę</value>
   </data>
+  <data name="Class" xml:space="preserve">
+    <value>Klasa</value>
+  </data>
+  <data name="ClassAssigned" xml:space="preserve">
+    <value>Klasy przypisane do przedmiotu</value>
+  </data>
   <data name="Classes" xml:space="preserve">
     <value>Klasy</value>
+  </data>
+  <data name="ClassGrades" xml:space="preserve">
+    <value>Oceny klasy</value>
+  </data>
+  <data name="ClassList" xml:space="preserve">
+    <value>Lista klas</value>
   </data>
   <data name="ClassName" xml:space="preserve">
     <value>Nazwa klasy</value>
@@ -189,14 +222,23 @@
   <data name="CurrentPassword" xml:space="preserve">
     <value>Obecne hasło</value>
   </data>
+  <data name="Date" xml:space="preserve">
+    <value>Data</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Usuń</value>
+  </data>
+  <data name="DeleteGrade" xml:space="preserve">
+    <value>Usunąć ocenę</value>
   </data>
   <data name="DeleteSubject" xml:space="preserve">
     <value>Czy chcesz usunąć przedmiot</value>
   </data>
   <data name="DeleteTutor" xml:space="preserve">
     <value>Usuń wychowawce</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Opis</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Edytuj</value>
@@ -219,6 +261,9 @@
   <data name="ForgotPassword" xml:space="preserve">
     <value>Zapomniałeś hasła</value>
   </data>
+  <data name="GradeDetails" xml:space="preserve">
+    <value>Szczegóły oceny</value>
+  </data>
   <data name="Grades" xml:space="preserve">
     <value>Oceny</value>
   </data>
@@ -233,6 +278,9 @@
   </data>
   <data name="LastNameError" xml:space="preserve">
     <value>Podaj nazwisko użytkownia!</value>
+  </data>
+  <data name="LeadTeacher" xml:space="preserve">
+    <value>Prowadzący</value>
   </data>
   <data name="LinkToChange" xml:space="preserve">
     <value>Wyślij linka na emaila aby zmienić hasło</value>
@@ -261,6 +309,9 @@
   <data name="MarksAverage" xml:space="preserve">
     <value>Średnia ocen</value>
   </data>
+  <data name="MySubjects" xml:space="preserve">
+    <value>Moje przedmioty</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Nazwa</value>
   </data>
@@ -270,14 +321,23 @@
   <data name="NewPassword" xml:space="preserve">
     <value>Nowe hasło</value>
   </data>
+  <data name="NoClasses" xml:space="preserve">
+    <value>Brak przypisanych klas</value>
+  </data>
   <data name="NoClassesInSystem" xml:space="preserve">
     <value>Brak klasy w systemie</value>
+  </data>
+  <data name="NoLeadTeachers" xml:space="preserve">
+    <value>Brak przypisanych prowadzących</value>
   </data>
   <data name="NoTutor" xml:space="preserve">
     <value>Brak wychowawcy</value>
   </data>
   <data name="Parent" xml:space="preserve">
     <value>Rodzic</value>
+  </data>
+  <data name="Parents" xml:space="preserve">
+    <value>Rodzice</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Hasło</value>
@@ -293,6 +353,9 @@
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Pamiętaj mnie</value>
+  </data>
+  <data name="RemindPassword" xml:space="preserve">
+    <value>Przypomnij hasło</value>
   </data>
   <data name="Role" xml:space="preserve">
     <value>Rola</value>
@@ -321,6 +384,9 @@
   <data name="StudentsBelongingToClass" xml:space="preserve">
     <value>Uczniowie należący do klasy</value>
   </data>
+  <data name="StudentsList" xml:space="preserve">
+    <value>Lista uczniów</value>
+  </data>
   <data name="StudentsNotAssigned" xml:space="preserve">
     <value>Uczniowi nieprzypisani do żadnej klasy</value>
   </data>
@@ -329,6 +395,9 @@
   </data>
   <data name="Teacher" xml:space="preserve">
     <value>Nauczyciel</value>
+  </data>
+  <data name="TeachersPanel" xml:space="preserve">
+    <value>Panel nauczyciela</value>
   </data>
   <data name="Tests" xml:space="preserve">
     <value>Testy</value>
@@ -347,6 +416,9 @@
   </data>
   <data name="Username" xml:space="preserve">
     <value>Nazwa użytkownika</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Wartość</value>
   </data>
   <data name="ViewClasses" xml:space="preserve">
     <value>Wyświetl klasy</value>
