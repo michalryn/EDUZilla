@@ -35,15 +35,15 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Prowadzący</th>
-            <th scope="col">Akcje</th>
+            <th scope="col">@languageResource["LeadTeacher"]</th>
+            <th scope="col">@languageResource["Actions"]</th>
         </tr>
     </thead>
     <tbody>
         @if (!Model.Teachers.Any())
         {
             <tr>
-                <td>Brak przypisanych prowadzących</td>
+                <td>@languageResource["NoLeadTeachers"]</td>
             </tr>
         }
         @foreach (TeacherListViewModel teacher in Model.Teachers)
@@ -59,7 +59,7 @@
                 <input type="hidden" name="teacherId" value="@teacher.Id" />
             <tr>
                 <td>@teacher.FirstName @teacher.LastName (<i>@teacher.Email</i>)</td>
-                <td><button type="submit">Usuń</button></td>
+                <td><button type="submit">@languageResource["Delete"]</button></td>
             </tr>
             </form>
 
@@ -70,24 +70,24 @@
 <form method="post" asp-controller="Course" asp-action="AddTeacher">
     <input type="hidden" name="id" value="@Model.Id" />
     <div class="input-group mb-3">
-        <label class="input-group-text">Dodaj prowadzącego</label>
+        <label class="input-group-text">@languageResource["AddLeadTeacher"]</label>
         <select class="form-select" asp-items="Model.AvailableTeachers" name="teacherId"></select>
-        <button type="submit" class="btn btn-success">Dodaj</button>
+        <button type="submit" class="btn btn-success">@languageResource["Add"]</button>
     </div>
 </form>
 
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Nazwa klasy</th>
-            <th scope="col">Akcje</th>
+            <th scope="col">@languageResource["ClassName"]</th>
+            <th scope="col">@languageResource["Actions"]</th>
         </tr>
     </thead>
     <tbody>
         @if (!Model.Classes.Any())
         {
             <tr>
-                <td>Brak przypisanych klas</td>
+                <td>@languageResource["NoClasses"]</td>
             </tr>
         }
         @foreach (ClassListViewModel group in Model.Classes)
@@ -103,7 +103,7 @@
                 <input type="hidden" name="classId" value="@group.Id" />
             <tr>
                 <td>@group.Name</td>
-                <td><button type="submit">Usuń</button></td>
+                <td><button type="submit">@languageResource["Delete"]</button></td>
             </tr>
             </form>
 
@@ -114,9 +114,9 @@
 <form method="post" asp-controller="Course" asp-action="AddClass">
     <input type="hidden" name="id" value="@Model.Id" />
     <div class="input-group mb-3">
-        <label class="input-group-text">Przypisz przedmiot do klasy</label>
-        <select class="form-select" asp-items="Model.AvailableClasses" name="classId"></select>
-        <button type="submit" class="btn btn-success">Dodaj</button>
+        <label class="input-group-text">@languageResource["AsignSubject"]</label>
+        <select class="form-select" asp-items="Model.AvailableClasses"  name="classId"></select>
+        <button type="submit" class="btn btn-success">@languageResource["Add"]</button>
     </div>
 </form>
 

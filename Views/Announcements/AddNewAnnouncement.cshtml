@@ -19,7 +19,7 @@
                         @if (@Model != null)
                         {
                             <input asp-for="ChosenClassId" value="@Model.ChosenClass.Id" class="form-control" aria-required="true">
-                            <label class="form-label">Klasa</label>
+                            <label class="form-label">@languageResource["Class"]</label>
                         }
                     </div>
 
@@ -33,15 +33,15 @@
                 <div class="d-flex">
 
                     <div class="form-floating">
-                        <input asp-for="SenderId" class="form-control" aria-required="true" data-val="true" value="@UserManager.GetUserAsync(User).Result.Id">
+                        <input class="form-control" disabled="" aria-required="true" data-val="true" value="@UserManager.GetUserAsync(User).Result.Email">
                         <label class="form-label w-auto">Email</label>
                     </div>
                     <div class="form-floating align-self-center px-4">
                         <p class="align-self-center">-</p>
                     </div>
                     <div class="form-floating">
-                        <input asp-for="Created" class="form-control" aria-required="true" data-val="true" value="@DateTime.Now">
-                        <label class="form-label w-auto">Date</label>
+                        <input class="form-control" disabled="" aria-required="true" data-val="true" value="@DateTime.Now">
+                        <label class="form-label w-auto">@languageResource["Date"]</label>
                     </div>
 
                     <div class="form-floating ms-auto align-self-center">
