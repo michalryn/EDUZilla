@@ -20,6 +20,11 @@ namespace EDUZilla.Controllers
         {
             var course = await _courseService.GetCourseViewModelAsync(id);
 
+            if(course == null)
+            {
+                return NotFound();
+            }
+
             return View(course);
         }
 
@@ -41,6 +46,27 @@ namespace EDUZilla.Controllers
             //course.AvailableClasses?.Insert(0, new SelectListItem() { Value = "", Text = "Wybierz klasę", Selected = true, Disabled = true });
 
             return View(course);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> ChangeName(int id, string newName)
+        {
+            var check = await _courseService.CheckIfCourseExists(newName);
+            
+            if(check)
+            {
+                return RedirectToAction("EditCourse", new { id = id });
+            }
+
+            var result = await _courseService.ChangeCourseName(id, newName);
+
+            if(!result)
+            {
+                return RedirectToAction("EditCourse", new { id = id });
+            }
+
+            return RedirectToAction("ViewCourses");
         }
 
         [Authorize(Roles = "Admin")]
@@ -136,12 +162,19 @@ namespace EDUZilla.Controllers
         {
             if(ModelState.IsValid)
             {
+                var check = await _courseService.CheckIfCourseExists(name);
+
+                if(check)
+                {
+                    return RedirectToAction("ViewCourses");
+                }
+
                 var result = await _courseService.AddCourseAsync(name);
 
                 //error handle
                 if(!result)
                 {
-                    return RedirectToAction("ViewCourses");
+                    return BadRequest();
                 }
 
                 return RedirectToAction("ViewCourses");
@@ -171,7 +204,64 @@ namespace EDUZilla.Controllers
                 return NotFound();
             }
 
-            return View(new { classes = classes, courseId = id, courseName = course.Name });
+            return View(new { classes = classes, courseId = id, courseName = course.CourseName });
+        }
+
+        [Authorize(Roles = "Teacher")]
+        [HttpGet]
+        public IActionResult AddFile(int id)
+        {
+            return View(id);
+        }
+
+        [Authorize(Roles = "Teacher")]
+        [HttpPost]
+        public async Task<IActionResult> AddFile(AddFileForm form)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(form);
+            }
+            
+            if(form.File.ContentType != "application/pdf")
+            {
+                return View(form);
+            }
+
+            var result = await _courseService.AddFile(form);
+
+            if(!result)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction("Index", new {id = form.CourseId});
+        }
+
+        [Authorize(Roles = "Teacher")]
+        [HttpPost]
+        public async Task<IActionResult> DeleteFile(int id, int courseId)
+        {
+            var result = await _courseService.DeleteFile(id);
+
+            if(!result)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction("Index", new { id = courseId });
+        }
+
+        public async Task<FileResult> DownloadFile(int id)
+        {
+            var file = await _courseService.GetFile(id);
+
+            if (file == null)
+            {
+                return null;
+            }
+
+            return File(file.Data, "application/pdf", file.FileName);
         }
     }
 }

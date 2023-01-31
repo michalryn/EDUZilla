@@ -3,6 +3,7 @@ using EDUZilla.Models;
 using EDUZilla.ViewModels.Class;
 using EDUZilla.ViewModels.Grade;
 using EDUZilla.ViewModels.Student;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace EDUZilla.Services
@@ -15,17 +16,21 @@ namespace EDUZilla.Services
         private readonly StudentRepository _studentRepository;
         private readonly CourseRepository _courseRepository;
         private readonly GradeRepository _gradeRepository;
-
+        private readonly ParentRepository _parentRepository;
+        private readonly IEmailSender _emailSender;
         #endregion
 
         #region Constructors
 
-        public GradeService(ClassRepository classRepository, StudentRepository studentRepository, CourseRepository courseRepository, GradeRepository gradeRepository)
+        public GradeService(ClassRepository classRepository, StudentRepository studentRepository, CourseRepository courseRepository,
+            GradeRepository gradeRepository, ParentRepository parentRepository, IEmailSender emailSender)
         {
             _classRepository = classRepository;
             _studentRepository = studentRepository;
             _courseRepository = courseRepository;
             _gradeRepository = gradeRepository;
+            _parentRepository = parentRepository;
+            _emailSender = emailSender;
         }
 
         #endregion
@@ -91,6 +96,78 @@ namespace EDUZilla.Services
             viewModel.Students = studentViewModel;
             var className = group.Select(g => g.Name).Single();
             viewModel.ClassName = className;
+            viewModel.CourseName = await _courseRepository.GetCourseById(courseId).Select(c => c.Name).SingleAsync();
+
+            return viewModel;
+        }
+
+        public async Task<ClassGradesSummaryVM> GetClassGradesSummary(int classId, int courseId, DateTime startDate, DateTime endDate)
+        {
+
+            var group = _classRepository.GetClassById(classId).Include("Students.Grades");
+
+            ClassGradesSummaryVM viewModel = new ClassGradesSummaryVM()
+            {
+                CourseId = courseId,
+                ClassId = classId
+            };
+
+            if (group == null)
+            {
+                return viewModel;
+            }
+
+            var students = group.Select(g => g.Students);
+
+            if (!students.Any())
+            {
+                return viewModel;
+            }
+
+            var studentsGrades = await students.SingleAsync();
+
+            List<StudentGradesSummaryVM> studentViewModel = new List<StudentGradesSummaryVM>();
+
+            foreach (var student in studentsGrades)
+            {
+                List<GradeViewModel> gradesViewModel = new List<GradeViewModel>();
+
+                var grades = student.Grades?.Where(g => g.CourseId == courseId && g.CreatedDate >= startDate && g.CreatedDate <= endDate);
+
+                double gradesSum = 0d;
+
+                if (grades != null)
+                {
+                    foreach (Grade grade in grades)
+                    {
+                        gradesSum += grade.Value;
+                        gradesViewModel.Add(new GradeViewModel()
+                        {
+                            Id = grade.Id,
+                            Value = grade.Value,
+                            Description = grade.Description,
+                            CreatedDate = grade.CreatedDate
+                        });
+                    }
+                }
+
+                double average = gradesViewModel.Count() != 0 ? gradesSum / gradesViewModel.Count() : 0;
+
+                studentViewModel.Add(new StudentGradesSummaryVM()
+                {
+                    StudentId = student.Id,
+                    FirstName = student.FirstName,
+                    LastName = student.LastName,
+                    Email = student.Email,
+                    Grades = gradesViewModel,
+                    GradeAverage = average
+                });
+            }
+
+            viewModel.Students = studentViewModel;
+            var className = group.Select(g => g.Name).Single();
+            viewModel.ClassName = className;
+            viewModel.CourseName = await _courseRepository.GetCourseById(courseId).Select(c => c.Name).SingleAsync();
 
             return viewModel;
         }
@@ -180,7 +257,7 @@ namespace EDUZilla.Services
             var courses = grades.Select(g => g.Course.Name).Distinct();
 
             var courseSum = 0d;
-            foreach(var course in courses)
+            foreach (var course in courses)
             {
                 CourseGradesSummary courseSummary = new CourseGradesSummary()
                 {
@@ -232,7 +309,7 @@ namespace EDUZilla.Services
                 return viewModel;
             }
 
-            foreach(var course in courses)
+            foreach (var course in courses)
             {
                 CourseGrades courseGrades = new CourseGrades()
                 {
@@ -240,7 +317,7 @@ namespace EDUZilla.Services
                     Grades = new List<GradeViewModel>()
                 };
 
-                foreach(var grade in grades.Where(g => g.Course?.Name == course))
+                foreach (var grade in grades.Where(g => g.Course?.Name == course))
                 {
                     courseGrades.Grades.Add(new GradeViewModel()
                     {
@@ -255,6 +332,63 @@ namespace EDUZilla.Services
             }
 
             return viewModel;
+        }
+
+        public async Task SendStudentSummaryToParents()
+        {
+            var students = await _studentRepository.GetAll().ToListAsync();
+
+            if (!students.Any())
+            {
+                return;
+            }
+
+            foreach (var student in students)
+            {
+                if (student.ParentId == null)
+                {
+                    continue;
+                }
+
+                var parent = await _parentRepository.GetByIdAsync(student.ParentId);
+
+                if (parent == null)
+                {
+                    continue;
+                }
+
+                StudentGradesSummary summary = await GetStudentGradesSummary(student.Id, new DateTime(2022, 9, 1), DateTime.Now);
+
+                if(summary == null)
+                {
+                    continue;
+                }
+
+                string emailMessage = GetSummaryMessage(summary);
+
+                await _emailSender.SendEmailAsync(parent.Email, "Podsumowanie ocen", emailMessage);
+            }
+        }
+
+        private string GetSummaryMessage(StudentGradesSummary summary)
+        {
+            var message = "" + summary.StudentName + "\n";
+
+            foreach(CourseGradesSummary course in summary.CoursesSummary)
+            {
+                message += course.CourseName + ":";
+
+                foreach(int grade in course.Grades)
+                {
+                    message += " " + grade + ",";
+                }
+
+                message += " Średnia: " + course.GradesAverage + "\n";
+            }
+
+            message += "Średnia ogólna: " + summary.OverallAverege;
+
+            return message;
         }
 
         #endregion

@@ -8,7 +8,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">@languageResource["ClassAssigned"] @Model.courseName</th>
+            <th scope="col">@languageResource["ClassAssigned"]: @Model.courseName</th>
             <th scope="col">@languageResource["Actions"]</th>
         </tr>
     </thead>
@@ -23,7 +23,10 @@
 
             <tr>
                 <td><a>@group.Name</a></td>
-                <td><a asp-action="ClassesGrades" asp-controller="Grade" asp-all-route-data="routeValues">@languageResource["Marks"]</a></td>
+                <td>
+                    <a class="btn btn-primary" asp-action="ClassesGrades" asp-controller="Grade" asp-all-route-data="routeValues">@languageResource["Grades"]</a>
+                    <a class="btn btn-primary" asp-action="ClassGradesSummary" asp-controller="Grade" asp-all-route-data="routeValues">Podsumowanie</a>
+                </td>
             </tr>
         }
     </tbody>

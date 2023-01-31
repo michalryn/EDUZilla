@@ -132,6 +132,9 @@
   <data name="AddCourse" xml:space="preserve">
     <value>Dodaj przedmiot</value>
   </data>
+  <data name="AddFile" xml:space="preserve">
+    <value>Dodaj plik</value>
+  </data>
   <data name="AddGrade" xml:space="preserve">
     <value>Dodaj ocenę</value>
   </data>
@@ -207,6 +210,9 @@
   <data name="CourseName" xml:space="preserve">
     <value>Nazwa przedmiotu</value>
   </data>
+  <data name="Courses" xml:space="preserve">
+    <value>Przedmioty</value>
+  </data>
   <data name="CreateClass" xml:space="preserve">
     <value>Stwórz klasę</value>
   </data>
@@ -251,6 +257,12 @@
   </data>
   <data name="EmailError" xml:space="preserve">
     <value>Podaj adres e-mail!</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>Plik</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>Pliki</value>
   </data>
   <data name="FirstName" xml:space="preserve">
     <value>Imię</value>
@@ -422,6 +434,9 @@
   </data>
   <data name="ViewClasses" xml:space="preserve">
     <value>Wyświetl klasy</value>
+  </data>
+  <data name="ViewCourses" xml:space="preserve">
+    <value>Wyświetl przedmioty</value>
   </data>
   <data name="ViewStudents" xml:space="preserve">
     <value>Wyświetl uczniów</value>

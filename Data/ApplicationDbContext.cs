@@ -19,6 +19,7 @@ namespace EDUZilla.Data
         public DbSet<Course> Courses { get; set; }
         public DbSet<Grade> Grades { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
+        public DbSet<FileModel> FileModels { get; set; }
         
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -32,6 +33,11 @@ namespace EDUZilla.Data
             builder.Entity<Grade>()
                 .HasOne(g => g.Student)
                 .WithMany(c => c.Grades)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<FileModel>()
+                .HasOne(file => file.Course)
+                .WithMany(c => c.FileModels)
                 .OnDelete(DeleteBehavior.Cascade);
 
         }

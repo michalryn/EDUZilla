@@ -1,6 +1,5 @@
 ﻿@using EDUZilla.ViewModels.Grade
 @using EDUZilla.ViewModels.Student
-
 @{
     ViewData["Title"] = @languageResource["Grades"];
 }
@@ -8,40 +7,56 @@
 <h1>@languageResource["ClassGrades"] @Model.ClassName</h1>
 <h3><b>@Model.CourseName</b></h3>
 
+<form method="post" class="mb-3 row g-3">
+    <input type="hidden" name="courseId" value="@Model.CourseId"/>
+    <input type="hidden" name="classId" value="@Model.ClassId"/>
+    <div class="col-md-6">
+        <label class="form-label">Od:</label>
+        <input class="form-control" type="datetime-local" name="startDate" />
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Do:</label>
+        <input class="form-control" type="datetime-local" name="endDate" />
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Filtruj</button>
+    </div>
+</form>
+
 <div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
                 <th scope="auto">@languageResource["Students"]</th>
                 <th scope="auto">@languageResource["Grades"]</th>
-                <th scope="col">@languageResource["Actions"]</th>
+                <th scope="col">Średnia</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (StudentCourseGradesViewModel student in Model.Students)
+            @foreach (StudentGradesSummaryVM student in Model.Students)
             {
                 var routeValues = new Dictionary<string, string>
-                {
-                    {"studentId", "" + student.StudentId},
-                    {"courseId", "" + Model.CourseId},
-                    {"classId", "" + Model.ClassId}
-                };
+            {
+            {"studentId", "" + student.StudentId},
+            {"courseId", "" + Model.CourseId},
+            {"classId", "" + Model.ClassId}
+            };
                 <tr>
                     <td scope="auto" class="col-3">@student.FirstName @student.LastName</td>
                     <td scope="auto" class="col-6">
                         @foreach (GradeViewModel grade in student.Grades)
                         {
                             var gradeValues = new Dictionary<string, string>
-                            {
-                                {"id", "" + @grade.Id},
-                                {"courseId", "" + Model.CourseId},
-                                {"classId", "" + Model.ClassId}
-                            };
+                    {
+                    {"id", "" + @grade.Id},
+                    {"courseId", "" + Model.CourseId},
+                    {"classId", "" + Model.ClassId}
+                    };
                             <a asp-action="GradeDetails" asp-all-route-data="gradeValues" class="badge text-bg-primary text-decoration-none">@grade.Value</a>
                         }
                     </td>
                     <td scope="col">
-                        <a class="btn btn-primary" asp-action="AddGrade" asp-all-route-data="routeValues">@languageResource["AddGrade"]</a>
+                        @student.GradeAverage
                     </td>
                 </tr>
             }
