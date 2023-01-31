@@ -1,0 +1,23 @@
+﻿@using EDUZilla.ViewModels.Course
+
+@{
+    ViewData["Title"] = @languageResource["Courses"];
+}
+
+<h1>@languageResource["Courses"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">@languageResource["MySubjects"]</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(CourseListViewModel course in Model)
+        {
+            <tr>
+                <td><a asp-action="Index" asp-controller ="Course" asp-route-id="@course.Id">@course.Name</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

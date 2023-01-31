@@ -124,5 +124,29 @@ namespace EDUZilla.Controllers
             return View(children);
         }
 
+        [Authorize(Roles = "Student")]
+        [HttpGet]
+        public async Task<IActionResult> ViewCourses()
+        {
+            string studentName = User.Identity.Name;
+
+            if (studentName == null)
+            {
+                return BadRequest();
+            }
+
+            var studentId = await _studentService.GetStudentIdAsync(studentName);
+
+            if (studentId == null)
+            {
+                return NotFound();
+            }
+
+            var courses = await _studentService.GetCourseListViewModel(studentId);
+
+            return View(courses);
+
+        }
+
     }
 }

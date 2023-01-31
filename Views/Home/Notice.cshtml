@@ -11,9 +11,13 @@
         <div class="float-start">
             <h1><b>@languageResource["Announcements"]:</b></h1>
         </div>
-        <div class="ms-auto">
-            <a asp-controller="Announcements" asp-action="AddNewAnnouncement" class="btn btn-primary">@languageResource["AddAnnouncement"] <i class="fa-regular fa-square-plus"></i></a>
-        </div>
+        @if (User.IsInRole("Teacher"))
+        {
+            <div class="ms-auto">
+                <a asp-controller="Announcements" asp-action="AddNewAnnouncement" class="btn btn-primary">@languageResource["AddAnnouncement"] <i class="fa-regular fa-square-plus"></i></a>
+            </div>
+        }
+
     </div>
 
     <div class="card mb-4">

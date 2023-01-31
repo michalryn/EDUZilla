@@ -2,12 +2,12 @@
 
 namespace EDUZilla.ViewModels.Class
 {
-    public class ClassGradeViewModel
+    public class ClassGradesSummaryVM
     {
         public int CourseId { get; set; }
         public string CourseName { get; set; }
         public int ClassId { get; set; }
         public string ClassName { get; set; }
-        public List<StudentCourseGradesViewModel>? Students { get; set; }
+        public List<StudentGradesSummaryVM> Students { get; set; }
     }
 }

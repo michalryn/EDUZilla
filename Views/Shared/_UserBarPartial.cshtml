@@ -22,10 +22,20 @@
                             </a>
                         </li>
                         <li class="nav-item icons">
-                            <a asp-controller="Home" asp-action="Tests" class="navbar-brand center">
-                                <i class="fa-solid fa-table-list fa-2x"></i>
-                                <p>@languageResource["Tests"]</p>
-                            </a>
+                            @if (User.IsInRole("Teacher"))
+                            {
+                                <a asp-controller="Teacher" asp-action="Index" class="navbar-brand center">
+                                    <i class="fa-solid fa-table-list fa-2x"></i>
+                                    <p>@languageResource["Courses"]</p>
+                                </a>
+                            }
+                            else
+                            {
+                                <a asp-controller="Student" asp-action="ViewCourses" class="navbar-brand center">
+                                    <i class="fa-solid fa-table-list fa-2x"></i>
+                                    <p>@languageResource["Courses"]</p>
+                                </a>
+                            }
                         </li>
                         <li class="nav-item icons">
                             <a asp-controller="Student" asp-action="StudentGrades" class="navbar-brand center">

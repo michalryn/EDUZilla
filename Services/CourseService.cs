@@ -2,6 +2,7 @@
 using EDUZilla.Models;
 using EDUZilla.ViewModels.Class;
 using EDUZilla.ViewModels.Course;
+using EDUZilla.ViewModels.FileModel;
 using EDUZilla.ViewModels.Teacher;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -15,16 +16,18 @@ namespace EDUZilla.Services
         private readonly CourseRepository _courseRepository;
         private readonly TeacherRepository _teacherRepository;
         private readonly ClassRepository _classRepository;
+        private readonly FileModelRepository _fileModelRepository;
 
         #endregion
 
         #region Constructors
 
-        public CourseService(CourseRepository courseRepository, TeacherRepository teacherRepository, ClassRepository classRepository)
+        public CourseService(CourseRepository courseRepository, TeacherRepository teacherRepository, ClassRepository classRepository, FileModelRepository fileModelRepository)
         {
             _courseRepository = courseRepository;
             _teacherRepository = teacherRepository;
             _classRepository = classRepository;
+            _fileModelRepository = fileModelRepository;
         }
 
         #endregion
@@ -126,6 +129,17 @@ namespace EDUZilla.Services
             return true;
         }
 
+        public async Task<bool> CheckIfCourseExists(string name)
+        {
+            var course = await _courseRepository.GetAll().Where(x => x.Name == name).FirstOrDefaultAsync();
+            
+            if(course == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
         public async Task<bool> AddCourseAsync(string name)
         {
             try
@@ -143,6 +157,21 @@ namespace EDUZilla.Services
             return true;
         }
 
+        public async Task<bool> ChangeCourseName(int id, string name)
+        {
+            try
+            {
+                var course = await _courseRepository.GetByIdAsync(id);
+                course.Name = name;
+                await _courseRepository.UpdateAndSaveChangesAsync(course);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+        }
         public async Task<List<CourseListViewModel>> GetCoursesListAsync()
         {
             var result = await _courseRepository.GetCourses().ToListAsync();
@@ -217,7 +246,7 @@ namespace EDUZilla.Services
             {
                 Course course = await _courseRepository.GetCourseById(id).Include("Classes").SingleAsync();
                 Class group = await _classRepository.GetClassById(classId).Include("Courses").SingleAsync();
-                
+
                 if (course == null)
                     return false;
 
@@ -264,7 +293,7 @@ namespace EDUZilla.Services
         {
             var course = await _courseRepository.GetCourseById(courseId).Include("Classes").SingleAsync();
 
-            if(course == null)
+            if (course == null)
             {
                 return new List<ClassListViewModel>();
             }
@@ -288,11 +317,104 @@ namespace EDUZilla.Services
             return classes;
         }
 
-        public async Task<Course> GetCourseViewModelAsync(int courseId)
+        public async Task<CourseViewModel> GetCourseViewModelAsync(int courseId)
         {
-            var course = await _courseRepository.GetCourseById(courseId).SingleAsync();
+            var course = await _courseRepository.GetCourseById(courseId).Include("FileModels").SingleAsync();
 
-            return course;
+            if (course == null)
+            {
+                return null;
+            }
+
+            CourseViewModel viewModel = new CourseViewModel()
+            {
+                CourseId = course.Id,
+                CourseName = course.Name,
+                Files = new List<FileViewModel>()
+            };
+
+            if (course.FileModels == null)
+            {
+                return viewModel;
+            }
+
+            foreach (FileModel file in course.FileModels)
+            {
+                viewModel.Files.Add(new FileViewModel()
+                {
+                    Id = file.Id,
+                    Name = file.FileName,
+                    Description = file.FileDescription
+                });
+
+            }
+
+            return viewModel;
+        }
+
+        public async Task<bool> AddFile(AddFileForm form)
+        {
+            try
+            {
+                var course = await _courseRepository.GetCourseById(form.CourseId).Include("FileModels").SingleAsync();
+
+                if (course == null)
+                {
+                    return false;
+                }
+
+                FileModel file = new FileModel()
+                {
+                    FileDescription = form.FileDescription,
+                    FileName = form.File.FileName,
+                };
+
+                using (Stream stream = form.File.OpenReadStream())
+                {
+                    byte[] data = new byte[stream.Length];
+                    stream.Read(data, 0, data.Length);
+                    file.Data = data;
+
+                    stream.Close();
+                }
+
+                if (course.FileModels == null)
+                {
+                    course.FileModels = new List<FileModel>();
+                }
+
+                course.FileModels.Add(file);
+
+                await _courseRepository.UpdateAndSaveChangesAsync(course);
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<FileModel> GetFile(int id)
+        {
+            var file = await _fileModelRepository.GetByIdAsync(id);
+
+            return file;
+        }
+
+        public async Task<bool> DeleteFile(int id)
+        {
+            try
+            {
+                await _fileModelRepository.RemoveByIdAndSaveChangesAsync(id);
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
         #endregion
     }

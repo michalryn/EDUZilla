@@ -5,11 +5,12 @@
 @{
     ViewData["Title"] = "Edytuj przedmiot";
 }
-<form>
+<form method="post" asp-action="ChangeName">
+    <input type="hidden" name=id value="@Model.Id"/>
     <label class="form-label">@languageResource["Name"]:</label>
     <div class="mb-3 input-group">
-        <input class="form-control" type="text" value="@Model.Name" placeholder=@languageResource["SubjectName"] />
-        <button class="btn btn-success">@languageResource["Save"]</button>
+        <input class="form-control" name="newName" type="text" value="@Model.Name" placeholder=@languageResource["SubjectName"] />
+        <button type="submit" class="btn btn-success">@languageResource["Save"]</button>
     </div>
 </form>
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labeledby="deleteModalLabel" aria-hidden="true">
@@ -114,7 +115,7 @@
 <form method="post" asp-controller="Course" asp-action="AddClass">
     <input type="hidden" name="id" value="@Model.Id" />
     <div class="input-group mb-3">
-        <label class="input-group-text">@languageResource["AsignSubject"]</label>
+        <label class="input-group-text">@languageResource["AssignSubject"]</label>
         <select class="form-select" asp-items="Model.AvailableClasses"  name="classId"></select>
         <button type="submit" class="btn btn-success">@languageResource["Add"]</button>
     </div>

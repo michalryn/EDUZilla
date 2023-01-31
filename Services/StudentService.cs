@@ -1,5 +1,6 @@
 ﻿using EDUZilla.Data.Repositories;
 using EDUZilla.Models;
+using EDUZilla.ViewModels.Course;
 using EDUZilla.ViewModels.Student;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
@@ -126,6 +127,28 @@ namespace EDUZilla.Services
             }
 
             return children;
+        }
+
+        public async Task<List<CourseListViewModel>> GetCourseListViewModel(string id)
+        {
+            var student = await _studentRepository.GetStudentById(id).Include("Class.Courses").SingleAsync();
+
+            List<CourseListViewModel> courses = new List<CourseListViewModel>();
+
+            if(student == null || student.Class == null || student.Class.Courses == null)
+            {
+                return courses;
+            }
+
+            foreach(Course course in student.Class.Courses)
+            {
+                courses.Add(new CourseListViewModel()
+                {
+                    Id = course.Id,
+                    Name = course.Name
+                });
+            }
+            return courses;
         }
 
         #endregion

@@ -1,5 +1,31 @@
-﻿@{
-    ViewData["Title"] = "Strona przedmiotu";
+﻿@using EDUZilla.ViewModels.Course
+@using EDUZilla.ViewModels.FileModel
+@{
+    ViewData["Title"] = @Model.CourseName;
 }
 
-<h1>@Model.Name</h1>
+<h1>@Model.CourseName</h1>
+<h4>@languageResource["Files"]:</h4>
+<ul class="list-group mb-3">
+    @foreach (FileViewModel file in Model.Files)
+    {
+        <li class="list-group-item d-flex justify-content-between align-items-baseline">
+            <div><a class="nav-link" asp-action="DownloadFile" asp-route-id="@file.Id"><i class="fa-solid fa-file-pdf"></i> @file.Description</a></div>
+            @if (User.IsInRole("Teacher"))
+            {
+                <form method="post" asp-action="DeleteFile">
+                    <input type="hidden" name="id" value="@file.Id">
+                    <input type="hidden" name="courseId" value="@Model.CourseId">
+                    <button class="btn btn-sm btn-danger" type="submit">@languageResource["Delete"]</button>
+                </form>
+            }
+
+        </li>
+    }
+</ul>
+
+
+@if (User.IsInRole("Teacher"))
+{
+    <a class="btn btn-primary" asp-action="AddFile" asp-route-id="@Model.CourseId">@languageResource["AddFile"]</a>
+}

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Localization;
 using System.Globalization;
 using System.Reflection;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Hangfire;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,26 +24,19 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false).AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
 
 builder.Services.AddLocalization(options => options.ResourcesPath = "LanguageResources");
 
+builder.Services.AddHangfire(x => x
+    .UseRecommendedSerializerSettings()
+    .UseSqlServerStorage(connectionString)
+    );
+builder.Services.AddHangfireServer();
+
 //Dependency injection
 builder.Services.AddProjectService();
-/*
-builder.Services.AddControllersWithViews(options =>
-{
-    var policy = new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build();
-    options.Filters.Add(new AuthorizeFilter(policy));
-}).AddViewLocalization().AddDataAnnotationsLocalization(options =>
-{
-    var type = typeof(LanguageResource);
-    var assemblyName = new AssemblyName(type.GetTypeInfo().Assembly.FullName);
-    var factory = builder.Services.BuildServiceProvider().GetService<IStringLocalizerFactory>();
-});*/
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -85,6 +79,11 @@ app.UseRequestLocalization(new RequestLocalizationOptions
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseHangfireDashboard();
+app.UseHangfireServer();
+
+RecurringJob.AddOrUpdate<GradeService>(x => x.SendStudentSummaryToParents(), Cron.Monthly);
 
 app.UseRouting();
 

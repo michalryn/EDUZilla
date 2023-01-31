@@ -1,4 +1,5 @@
 ﻿using EDUZilla.Services;
+using EDUZilla.ViewModels.Class;
 using EDUZilla.ViewModels.Grade;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,46 @@ namespace EDUZilla.Controllers
         public async Task<IActionResult> ClassesGrades(int courseId, int classId)
         {
             var viewModel = await _gradeService.GetClassGradeViewModelAsync(classId, courseId);
+
+            return View(viewModel);
+        }
+
+        [Authorize(Roles = "Teacher")]
+        [HttpGet]
+        public async Task<IActionResult> ClassGradesSummary(int courseId, int classId, DateTime? startDate, DateTime? endDate)
+        {
+            ClassGradesSummaryVM viewModel = null;
+
+            if(startDate == null || endDate == null)
+            {
+                DateTime fromDate = new DateTime(2022, 9, 1);
+                DateTime toDate = DateTime.Today.AddDays(1);
+
+                viewModel = await _gradeService.GetClassGradesSummary(classId, courseId, fromDate, toDate);
+                return View(viewModel);
+            }
+
+            viewModel = await _gradeService.GetClassGradesSummary(classId, courseId, (DateTime)startDate, (DateTime)endDate);
+
+            return View(viewModel);
+        }
+
+        [Authorize(Roles = "Teacher")]
+        [HttpPost]
+        public async Task<IActionResult> ClassGradesSummary(int courseId, int classId, DateTime startDate, DateTime endDate)
+        {
+            ClassGradesSummaryVM viewModel = null;
+
+            if (startDate == null || endDate == null)
+            {
+                DateTime fromDate = new DateTime(2022, 9, 1);
+                DateTime toDate = DateTime.Today.AddDays(1);
+
+                viewModel = await _gradeService.GetClassGradesSummary(classId, courseId, fromDate, toDate);
+                return View(viewModel);
+            }
+
+            viewModel = await _gradeService.GetClassGradesSummary(classId, courseId, (DateTime)startDate, (DateTime)endDate);
 
             return View(viewModel);
         }
